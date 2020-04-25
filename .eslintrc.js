@@ -11,6 +11,7 @@ module.exports = {
   },
   plugins: [
     '@typescript-eslint',
+    'baseui',
   ],
   extends: [
     'eslint:recommended',
@@ -29,7 +30,12 @@ module.exports = {
     }],
     'class-methods-use-this': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
-    "react/react-in-jsx-scope": "off"
+    'react/react-in-jsx-scope': 'off',
+    'consistent-return': 'off',
+    // baseui
+    'baseui/deprecated-theme-api': "warn",
+    'baseui/deprecated-component-api': "warn",
+    'baseui/no-deep-imports': "warn"
   },
   "globals": {
     "React": "writable"

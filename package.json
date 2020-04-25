@@ -10,12 +10,17 @@
     "lint:ts": "eslint interfaces components pages utils --ext=.ts,.tsx --cache"
   },
   "dependencies": {
-    "deck.gl": "^8.1.2",
+    "@deck.gl/core": "^8.1.2",
+    "@deck.gl/layers": "^8.1.2",
+    "@deck.gl/react": "^8.1.2",
+    "baseui": "^9.72.0",
     "isomorphic-unfetch": "3.0.0",
     "next": "latest",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-map-gl": "^5.2.5"
+    "react-map-gl": "^5.2.5",
+    "styletron-engine-atomic": "^1.4.6",
+    "styletron-react": "^5.2.7"
   },
   "devDependencies": {
     "@danmarshall/deckgl-typings": "^3.4.8",
@@ -23,10 +28,14 @@
     "@types/react": "^16.9.16",
     "@types/react-dom": "^16.9.4",
     "@types/react-map-gl": "^5.2.2",
+    "@types/styletron-engine-atomic": "^1.1.0",
+    "@types/styletron-react": "^5.0.2",
+    "@types/styletron-standard": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^2.29.0",
     "@typescript-eslint/parser": "^2.29.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-typescript": "^7.2.1",
+    "eslint-plugin-baseui": "^9.72.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
