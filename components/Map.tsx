@@ -1,7 +1,9 @@
 import React from 'react';
 import DeckGL from '@deck.gl/react';
-import { LineLayer } from '@deck.gl/layers';
+import { ScatterplotLayer } from '@deck.gl/layers';
 import { StaticMap } from 'react-map-gl';
+import airports from '../utils/airports.json';
+// import { Airport } from '../interfaces/airports';
 
 // Initial viewport settings
 const INITIAL_VIEW_STATE = {
@@ -14,21 +16,29 @@ const INITIAL_VIEW_STATE = {
 
 };
 
-const data = [{sourcePosition: [-122.41669, 37.7853], targetPosition: [-122.41669, 37.781]}];
-
-export const Map: React.FC = () => {
-  
+const Map: React.FC = () => {
+  const renderLayers = [
+    new ScatterplotLayer<any>({
+      id: 'airports',
+      data: airports as any[],
+      radiusScale: 20,
+      getPosition: (d) => d.coordinates,
+      getFillColor: [255, 140, 0],
+      // getRadius: (d) => getSize(d.type),
+      getRadius: 60,
+      pickable: true,
+      // onHover: this._onHover
+    }),
+  ];
   return (
     <DeckGL
       controller
       width='100%'
       height='100%'
       initialViewState={INITIAL_VIEW_STATE}
-      layers={[
-        new LineLayer({id: 'line-layer', data})
-      ]}
+      layers={renderLayers}
     >
-      <StaticMap 
+      <StaticMap
         width='100%'
         height='100%'
         mapStyle='mapbox://styles/mapbox/dark-v9?optimize=true'
@@ -36,5 +46,6 @@ export const Map: React.FC = () => {
       />
     </DeckGL>
   );
-  
-}
+};
+
+export default Map;
