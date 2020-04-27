@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import DeckGL from '@deck.gl/react';
-import { ScatterplotLayer, LineLayer } from '@deck.gl/layers';
+import { ScatterplotLayer, ArcLayer } from '@deck.gl/layers';
 import { StaticMap } from 'react-map-gl';
+import { styled } from 'styletron-react';
 import airports from '../utils/airports.json';
 import flights from '../utils/20200101.json';
 import { Airport } from '../interfaces/airports';
-
+import { Flight } from '../interfaces/flight';
 
 // Initial viewport settings
 const INITIAL_VIEW_STATE = {
@@ -17,40 +18,37 @@ const INITIAL_VIEW_STATE = {
   bearing: 0,
 };
 
-interface AirportContent {
+interface TooltipContent {
   x: number;
   y: number;
-  content: Airport;
+  content: Airport | Flight;
+  type: 'airport' | 'flight';
+}
+interface TooltipProps {
+  $x: number;
+  $y: number;
 }
 
-const Map: React.FC = () => {
-  const [airportContent, setAirportContent] = useState<AirportContent>();
 
-  const renderTooltip = () => {
-    if (!airportContent) {
-      return;
-    }
-    const { x, y, content } = airportContent;
-    return content && (
-      <div
-        className='tooltip'
-        style={{
-          left: x,
-          top: y,
-          zIndex: 1000,
-          position: 'absolute',
-          padding: '4px',
-          background: 'rgba(0, 0, 0, 0.8)',
-          color: '#fff',
-          maxWidth: '300px',
-          fontSize: '10px',
-        }}
-      >
-        <div>{content.country}</div>
-        <div>{content.name}</div>
-      </div>
-    );
-  };
+// custom typeguards for Airport and Flight types
+const isAirport = (airport: Airport | Flight): airport is Airport => (airport as Airport).icao !== undefined;
+const isFlight = (flight: Airport | Flight): flight is Flight => (flight as Flight).icao24 !== undefined;
+
+const Map: React.FC = () => {
+  const [tooltipContent, setTooltipContent] = useState<TooltipContent>();
+  const Tooltip = styled('div', ({ $x, $y }: TooltipProps) => ({
+    left: `${$x}px`,
+    top: `${$y}px`,
+    zIndex: 1000,
+    position: 'absolute',
+    padding: '4px',
+    background: 'rgba(0, 0, 0, 0.8)',
+    color: '#fff',
+    maxWidth: '300px',
+    fontSize: '10px',
+    display: 'flex',
+    flexDirection: 'column',
+  }));
 
   const renderLayers = [
     new ScatterplotLayer<Airport>({
@@ -64,30 +62,71 @@ const Map: React.FC = () => {
       getRadius: 60,
       pickable: true,
       onHover: ({ x, y, object }) => {
-        setAirportContent({
+        setTooltipContent({
           x,
           y,
           content: object as Airport,
+          type: 'airport',
         });
       },
     }),
-    new LineLayer({
-      id: 'flight-paths',
+    new ArcLayer({
+      id: 'flight-arcs',
       data: flights as any[],
-      opacity: 0.8,
       getSourcePosition: (d) => d.start,
       getTargetPosition: (d) => d.end,
-      getColor: (d) => {
-        // const z = d.start[2];
-        const z = d.estArrivalAirportHorizDistance;
-        const r = z / 10000;
-        return [255 * (1 - r * 2), 128 * r, 255 * r, 255 * (1 - r)];
-      },
-      getWidth: 3,
+      getTargetColor: () => [213, 184, 255, 120],
+      getSourceColor: (d) => [255 * (1 - (d.end?.[0] * 2 / 10000)), 128 * (d.end?.[0] / 10000), 255 * (d.end?.[0] / 10000), 255 * (1 - (d.end?.[0] / 10000))],
+      // @ts-ignore
+      getStrokeWidth: () => 2,
       pickable: true,
-      // onHover: this._onHover,
+      opacity: 0.8,
+      getHeight: 0.1,
+      getTilt: 50,
+      onHover: ({ x, y, object }) => {
+        setTooltipContent({
+          x,
+          y,
+          content: object as Flight,
+          type: 'flight',
+        });
+      },
     }),
   ];
+
+  /**
+   * renders tooltip when user hovers over airport layer/flight arc
+   */
+  const renderTooltip = () => {
+    if (!tooltipContent) {
+      return;
+    }
+    const {
+      x, y, content, type,
+    } = tooltipContent;
+
+    return content && (
+      <Tooltip
+        $x={x}
+        $y={y}
+      >
+        {type === 'airport' && isAirport(content) && (
+          <>
+            <span>{content.country}</span>
+            <span>{content.name}</span>
+          </>
+        )}
+        {type === 'flight' && isFlight(content) && (
+          <>
+            <span>{content.icao24}</span>
+            <span>{content.estDepartureAirport}</span>
+            <span>{content.estArrivalAirport}</span>
+          </>
+        )}
+      </Tooltip>
+    );
+  };
+
   return (
     <DeckGL
       controller
