@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DeckGL from '@deck.gl/react';
 import { ScatterplotLayer, ArcLayer } from '@deck.gl/layers';
 import { StaticMap } from 'react-map-gl';
 import { styled } from 'styletron-react';
 import airports from '../utils/airports.json';
-import flights from '../utils/20200101.json';
 import { Airport } from '../interfaces/airports';
 import { Flight } from '../interfaces/flight';
+import DateSlider from './DateSlider';
 
 // Initial viewport settings
 const INITIAL_VIEW_STATE = {
@@ -18,12 +18,17 @@ const INITIAL_VIEW_STATE = {
   bearing: 0,
 };
 
+interface MapProps {
+  flightData: Flight[];
+}
+
 interface TooltipContent {
   x: number;
   y: number;
   content: Airport | Flight;
   type: 'airport' | 'flight';
 }
+
 interface TooltipProps {
   $x: number;
   $y: number;
@@ -34,8 +39,23 @@ interface TooltipProps {
 const isAirport = (airport: Airport | Flight): airport is Airport => (airport as Airport).icao !== undefined;
 const isFlight = (flight: Airport | Flight): flight is Flight => (flight as Flight).icao24 !== undefined;
 
-const Map: React.FC = () => {
+const Map: React.FC<MapProps> = ({ flightData }) => {
+  const timeRange: [number, number] = flightData.reduce(
+    (range, d) => {
+      const t = d.lastSeen;
+      // eslint-disable-next-line no-param-reassign
+      range = [Math.min(range[0], t), Math.max(range[1], t)];
+      return range;
+    },
+    [Infinity, -Infinity],
+  );
+  const [filteredFlightData, setFilteredFlightData] = useState<Flight[]>(flightData);
   const [tooltipContent, setTooltipContent] = useState<TooltipContent>();
+
+  useEffect(() => {
+
+  }, []);
+
   const Tooltip = styled('div', ({ $x, $y }: TooltipProps) => ({
     left: `${$x}px`,
     top: `${$y}px`,
@@ -72,7 +92,7 @@ const Map: React.FC = () => {
     }),
     new ArcLayer({
       id: 'flight-arcs',
-      data: flights as any[],
+      data: filteredFlightData as any[],
       getSourcePosition: (d) => d.start,
       getTargetPosition: (d) => d.end,
       getTargetColor: () => [213, 184, 255, 120],
@@ -127,22 +147,34 @@ const Map: React.FC = () => {
     );
   };
 
+  const onDateFilter = (value: number) => {
+    setFilteredFlightData(flightData.filter(({ lastSeen }) => lastSeen <= value));
+    console.log(filteredFlightData);
+  };
+
   return (
-    <DeckGL
-      controller
-      width='100%'
-      height='100%'
-      initialViewState={INITIAL_VIEW_STATE}
-      layers={renderLayers}
-    >
-      <StaticMap
+    <>
+      <DeckGL
+        controller
         width='100%'
         height='100%'
-        mapStyle='mapbox://styles/mapbox/dark-v9?optimize=true'
-        mapboxApiAccessToken='pk.eyJ1Ijoid2VudGp1biIsImEiOiJjazcxNmVrNjQwM2xvM2xuMWltZXVnMzk5In0.1onX_NKZazXl21fjb_6TlA'
+        initialViewState={INITIAL_VIEW_STATE}
+        layers={renderLayers}
+      >
+        <StaticMap
+          width='100%'
+          height='100%'
+          mapStyle='mapbox://styles/mapbox/dark-v9?optimize=true'
+          mapboxApiAccessToken='pk.eyJ1Ijoid2VudGp1biIsImEiOiJjazcxNmVrNjQwM2xvM2xuMWltZXVnMzk5In0.1onX_NKZazXl21fjb_6TlA'
+        />
+        {renderTooltip()}
+
+      </DeckGL>
+      <DateSlider
+        range={timeRange}
+        onFilter={onDateFilter}
       />
-      {renderTooltip()}
-    </DeckGL>
+    </>
   );
 };
 
