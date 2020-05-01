@@ -3,14 +3,18 @@ import { Slider, State } from 'baseui/slider';
 import React, { useEffect, useState } from 'react';
 import { styled } from 'styletron-react';
 
-const SliderContainer = styled('div', () => ({
-  position: 'absolute',
+const SliderContainer = styled('div', ({
+  backgroundColor: 'rgba(20, 20, 20, 0.8)',
   zIndex: 1,
-  bottom: '40px',
   width: '100%',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+
+  '@media (min-width: 768px)': {
+    flex: 1,
+    margin: '1rem 1rem 1rem 0',
+  },
 }));
 
 interface DateSliderProps {
@@ -54,7 +58,7 @@ const DateSlider: React.FC<DateSliderProps> = ({ range, onFilter }) => {
         overrides={{
           Root: {
             style: () => ({
-              width: '80%',
+              width: '90%',
             }),
           },
           ThumbValue: ({ $value }) => (
@@ -72,6 +76,7 @@ const DateSlider: React.FC<DateSliderProps> = ({ range, onFilter }) => {
           TickBar: ({ $min, $max }) => (
             <div
               className={css({
+                color: theme.colors.primaryA,
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',

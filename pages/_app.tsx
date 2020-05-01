@@ -1,8 +1,9 @@
+import { BaseProvider, DarkTheme } from 'baseui';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { AppProps } from 'next/app';
-import { Provider as StyletronProvider, DebugEngine } from 'styletron-react';
 import { Client, Server } from 'styletron-engine-atomic';
-import { BaseProvider, DarkTheme } from 'baseui';
+import { DebugEngine, Provider as StyletronProvider } from 'styletron-react';
+import './index.css';
 
 const getHydrateClass = () => (
   document.getElementsByClassName('_styletron_hydrate_') as HTMLCollectionOf<HTMLStyleElement>

@@ -1,14 +1,28 @@
 import { ArcLayer, ScatterplotLayer } from '@deck.gl/layers';
 import DeckGL from '@deck.gl/react';
+import { styled } from 'baseui';
 import React, { useState } from 'react';
 import { StaticMap } from 'react-map-gl';
 import { Airport } from '../interfaces/airports';
 import { Flight } from '../interfaces/flight';
+import airlines from '../utils/airlines.json';
 import airportsRaw from '../utils/airports.json';
 import DateSlider from './DateSlider';
-import { TooltipContent, ToolTip, FlightContent } from './Tooltip';
+import InformationPanel from './InformationPanel';
+import { FlightContent, ToolTip, TooltipContent } from './Tooltip';
 
 const airports = airportsRaw as Airport[];
+
+const ControlContainer = styled('div', ({
+  display: 'flex',
+  flexDirection: 'column',
+  height: '100vh',
+
+  '@media (min-width: 768px)': {
+    alignItems: 'flex-end',
+    flexDirection: 'row',
+  },
+}));
 
 // Initial viewport settings
 const INITIAL_VIEW_STATE = {
@@ -19,6 +33,18 @@ const INITIAL_VIEW_STATE = {
   pitch: 50,
   bearing: 0,
 };
+
+export interface PanelFilterCount {
+  name: string;
+  icao: string;
+  count: number;
+  checked: boolean;
+}
+
+export interface FilterContext {
+  selectedDate: number;
+  removedAirlines: string[];
+}
 
 interface MapProps {
   flightData: Flight[];
@@ -35,7 +61,13 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
     [Infinity, -Infinity],
   );
   const [filteredFlightData, setFilteredFlightData] = useState<Flight[]>(flightData);
+  const [panelFilter, setPanelFilter] = useState<PanelFilterCount[]>();
+
   const [tooltipContent, setTooltipContent] = useState<TooltipContent>();
+  const [filterContext, setFilterContext] = useState<FilterContext>({
+    selectedDate: timeRange[1],
+    removedAirlines: [],
+  });
 
   const renderLayers = [
     new ScatterplotLayer<Airport>({
@@ -101,8 +133,74 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
     );
   };
 
-  const onDateFilter = (value: number) => {
-    setFilteredFlightData(flightData.filter(({ lastSeen }) => lastSeen <= value && lastSeen > (value - 86400)));
+  /**
+   * reset date filter, filters the flights that lies within the selected date's day range,
+   * and reset airlines panel filters
+   * @param current current date, in epoch
+   */
+  const onDateFilter = (current: number) => {
+    setFilterContext({
+      selectedDate: current,
+      removedAirlines: [],
+    });
+    const dateFilteredFlights = flightData.filter(({ lastSeen }) => (
+      lastSeen <= current
+      && lastSeen > (current - 86400)
+    ));
+    setFilteredFlightData(dateFilteredFlights);
+
+    const calculated: PanelFilterCount[] = dateFilteredFlights.reduce((acc, cur) => {
+      const { callsign } = cur;
+      const airline = airlines.find((obj) => obj.icao && callsign.includes(obj.icao));
+      if (!airline || !airline.name || !airline.icao) {
+        console.log(airline);
+        console.log(callsign);
+        return acc;
+      }
+      const { name, icao } = airline;
+      if (!acc.some((option) => option.icao === icao)) {
+        return [
+          ...acc,
+          {
+            name,
+            icao,
+            count: 1,
+            checked: true,
+          },
+        ];
+      }
+      return acc.map((option) => {
+        if (option.icao === icao) {
+          return {
+            ...option,
+            count: option.count + 1,
+          };
+        }
+
+        return option;
+      });
+    }, [] as PanelFilterCount[]);
+    setPanelFilter(calculated);
+  };
+
+  /**
+   * add or remove airline codes on the filter, filters the flights that part of the selected airline codes
+   * @param code airline code
+   */
+  const onAirlineFilter = (code: string) => {
+    const { removedAirlines, selectedDate } = filterContext;
+    const updatedRemovedAirlines = removedAirlines.includes(code)
+      ? removedAirlines.filter((airline) => airline !== code)
+      : [...removedAirlines, code];
+    setFilterContext({
+      ...filterContext,
+      removedAirlines: updatedRemovedAirlines,
+    });
+    setFilteredFlightData(flightData.filter(({ callsign, lastSeen }) => (
+      lastSeen <= selectedDate
+      && lastSeen > (selectedDate - 86400)
+      && !updatedRemovedAirlines.some((airlineCode) => callsign.includes(airlineCode))
+    )));
   };
 
   return (
@@ -122,12 +220,19 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
           mapboxApiAccessToken='pk.eyJ1Ijoid2VudGp1biIsImEiOiJjazcxNmVrNjQwM2xvM2xuMWltZXVnMzk5In0.1onX_NKZazXl21fjb_6TlA'
         />
         {renderTooltip()}
-
       </DeckGL>
-      <DateSlider
-        range={timeRange}
-        onFilter={onDateFilter}
-      />
+      <ControlContainer>
+        <InformationPanel
+          filterContext={filterContext}
+          panelFilter={panelFilter}
+          data={filteredFlightData}
+          onAirlineFilter={onAirlineFilter}
+        />
+        <DateSlider
+          range={timeRange}
+          onFilter={onDateFilter}
+        />
+      </ControlContainer>
     </>
   );
 };
