@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { ArcLayer, ScatterplotLayer } from '@deck.gl/layers';
 import DeckGL from '@deck.gl/react';
-import { ScatterplotLayer, ArcLayer } from '@deck.gl/layers';
+import React, { useState } from 'react';
 import { StaticMap } from 'react-map-gl';
-import { styled } from 'styletron-react';
-import airports from '../utils/airports.json';
 import { Airport } from '../interfaces/airports';
 import { Flight } from '../interfaces/flight';
+import airportsRaw from '../utils/airports.json';
 import DateSlider from './DateSlider';
+import { TooltipContent, ToolTip, FlightContent } from './Tooltip';
+
+const airports = airportsRaw as Airport[];
 
 // Initial viewport settings
 const INITIAL_VIEW_STATE = {
@@ -22,23 +24,6 @@ interface MapProps {
   flightData: Flight[];
 }
 
-interface TooltipContent {
-  x: number;
-  y: number;
-  content: Airport | Flight;
-  type: 'airport' | 'flight';
-}
-
-interface TooltipProps {
-  $x: number;
-  $y: number;
-}
-
-
-// custom typeguards for Airport and Flight types
-const isAirport = (airport: Airport | Flight): airport is Airport => (airport as Airport).icao !== undefined;
-const isFlight = (flight: Airport | Flight): flight is Flight => (flight as Flight).icao24 !== undefined;
-
 const Map: React.FC<MapProps> = ({ flightData }) => {
   const timeRange: [number, number] = flightData.reduce(
     (range, d) => {
@@ -52,31 +37,12 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
   const [filteredFlightData, setFilteredFlightData] = useState<Flight[]>(flightData);
   const [tooltipContent, setTooltipContent] = useState<TooltipContent>();
 
-  useEffect(() => {
-
-  }, []);
-
-  const Tooltip = styled('div', ({ $x, $y }: TooltipProps) => ({
-    left: `${$x}px`,
-    top: `${$y}px`,
-    zIndex: 1000,
-    position: 'absolute',
-    padding: '4px',
-    background: 'rgba(0, 0, 0, 0.8)',
-    color: '#fff',
-    maxWidth: '300px',
-    fontSize: '10px',
-    display: 'flex',
-    flexDirection: 'column',
-  }));
-
   const renderLayers = [
     new ScatterplotLayer<Airport>({
       id: 'airports',
-      // @ts-ignore
       data: airports,
       radiusScale: 20,
-      getPosition: (d) => d.coordinates,
+      getPosition: (d) => d.coordinates as [number, number],
       getFillColor: [255, 140, 0],
       // getRadius: (d) => getSize(d.type),
       getRadius: 60,
@@ -97,8 +63,7 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
       getTargetPosition: (d) => d.end,
       getTargetColor: () => [213, 184, 255, 120],
       getSourceColor: (d) => [255 * (1 - (d.end?.[0] * 2 / 10000)), 128 * (d.end?.[0] / 10000), 255 * (d.end?.[0] / 10000), 255 * (1 - (d.end?.[0] / 10000))],
-      // @ts-ignore
-      getStrokeWidth: () => 2,
+      getWidth: 2,
       pickable: true,
       opacity: 0.8,
       getHeight: 0.1,
@@ -107,7 +72,7 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
         setTooltipContent({
           x,
           y,
-          content: object as Flight,
+          content: object as FlightContent,
           type: 'flight',
         });
       },
@@ -126,30 +91,18 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
     } = tooltipContent;
 
     return content && (
-      <Tooltip
-        $x={x}
-        $y={y}
-      >
-        {type === 'airport' && isAirport(content) && (
-          <>
-            <span>{content.country}</span>
-            <span>{content.name}</span>
-          </>
-        )}
-        {type === 'flight' && isFlight(content) && (
-          <>
-            <span>{content.icao24}</span>
-            <span>{content.estDepartureAirport}</span>
-            <span>{content.estArrivalAirport}</span>
-          </>
-        )}
-      </Tooltip>
+      <ToolTip
+        x={x}
+        y={y}
+        type={type}
+        content={content}
+      />
+
     );
   };
 
   const onDateFilter = (value: number) => {
-    setFilteredFlightData(flightData.filter(({ lastSeen }) => lastSeen <= value));
-    console.log(filteredFlightData);
+    setFilteredFlightData(flightData.filter(({ lastSeen }) => lastSeen <= value && lastSeen > (value - 86400)));
   };
 
   return (
@@ -165,6 +118,7 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
           width='100%'
           height='100%'
           mapStyle='mapbox://styles/mapbox/dark-v9?optimize=true'
+          // eslint-disable-next-line max-len
           mapboxApiAccessToken='pk.eyJ1Ijoid2VudGp1biIsImEiOiJjazcxNmVrNjQwM2xvM2xuMWltZXVnMzk5In0.1onX_NKZazXl21fjb_6TlA'
         />
         {renderTooltip()}

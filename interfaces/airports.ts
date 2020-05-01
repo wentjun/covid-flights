@@ -6,6 +6,6 @@ export interface Airport {
   state?: string;
   country?: string;
   elavation?: number;
-  coordinates: [number, number];
+  coordinates: number[];
   tz?: string;
 }
