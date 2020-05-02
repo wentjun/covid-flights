@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { styled } from 'styletron-react';
 
 const SliderContainer = styled('div', ({
-  backgroundColor: 'rgba(20, 20, 20, 0.8)',
+  backgroundColor: 'rgba(31, 31, 31, 0.8)',
   zIndex: 1,
   width: '100%',
   display: 'flex',

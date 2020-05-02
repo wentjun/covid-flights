@@ -13,14 +13,25 @@ import { FlightContent, ToolTip, TooltipContent } from './Tooltip';
 
 const airports = airportsRaw as Airport[];
 
-const ControlContainer = styled('div', ({
+const MapContainer = styled('div', ({
+  height: 'fill-available',
+  maxHeight: '100vh',
+}));
+
+const ControlContainer = styled('div', ({ $theme }) => ({
+  boxSizing: 'border-box',
   display: 'flex',
   flexDirection: 'column',
-  height: '100vh',
+  height: 'fill-available',
+  maxHeight: '100vh',
+  justifyContent: 'space-between',
+  padding: $theme.sizing.scale600,
+  zIndex: 1,
 
   '@media (min-width: 768px)': {
     alignItems: 'flex-end',
     flexDirection: 'row',
+    padding: 0,
   },
 }));
 
@@ -204,7 +215,7 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
   };
 
   return (
-    <>
+    <MapContainer>
       <DeckGL
         controller
         width='100%'
@@ -233,7 +244,7 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
           onFilter={onDateFilter}
         />
       </ControlContainer>
-    </>
+    </MapContainer>
   );
 };
 
