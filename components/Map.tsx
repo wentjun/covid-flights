@@ -39,12 +39,12 @@ const ControlContainer = styled('div', ({ $theme }) => ({
 
 // Initial viewport settings
 const INITIAL_VIEW_STATE = {
-  latitude: 1.355042,
-  longitude: 103.817996,
+  latitude: 1.3501900434,
+  longitude: 103.9940032959,
   zoom: 10,
   maxZoom: 16,
-  pitch: 50,
-  bearing: 0,
+  pitch: 60,
+  bearing: -30.791885970771773,
 };
 
 const VIEWS = [
@@ -72,7 +72,6 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
   );
   const [filteredFlightData, setFilteredFlightData] = useState<Flight[]>(flightData);
   const [panelFilter, setPanelFilter] = useState<PanelFilterCount[]>();
-
   const [tooltipContent, setTooltipContent] = useState<TooltipContent>();
   const [filterContext, setFilterContext] = useState<FilterContext>({
     selectedDate: timeRange[1],
@@ -103,25 +102,52 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
       data: filteredFlightData,
       getSourcePosition: (d) => d.start,
       getTargetPosition: (d) => d.end,
-      getTargetColor: () => [213, 184, 255, 120],
-      getSourceColor: (d) => [
-        255 * (1 - (d.end?.[0] * (2 / 10000))),
-        128 * (d.end?.[0] / 10000),
-        255 * (d.end?.[0] / 10000),
-        255 * (1 - (d.end?.[0] / 10000)),
-      ],
-      getWidth: 2,
+      getTargetColor: (e) => (
+        (tooltipContent?.content as FlightContent)?.lastSeen === e?.lastSeen
+          ? [0, 181, 204]
+          : [231, 76, 60, 120]
+      ),
+      getSourceColor: (e) => (
+        (tooltipContent?.content as FlightContent)?.lastSeen === e?.lastSeen
+          ? [0, 181, 204, 120]
+          : [255, 128, 255, 120]
+      ),
+      getWidth: (e) => (
+        (tooltipContent?.content as FlightContent)?.lastSeen === e?.lastSeen
+          ? 3
+          : 2
+      ),
       pickable: true,
       opacity: 0.8,
       getHeight: 0.1,
       getTilt: 50,
       onHover: ({ x, y, object }) => {
+        if (!object) {
+          setTooltipContent(undefined);
+          return;
+        }
+        const {
+          callsign, firstSeen, lastSeen, startName, endName,
+        } = object;
+
+        const content: FlightContent = {
+          callsign,
+          firstSeen,
+          lastSeen,
+          arrivalAirport: endName,
+          departureAirport: startName,
+        };
         setTooltipContent({
           x,
           y,
-          content: object as FlightContent,
+          content,
           type: 'flight',
         });
+      },
+      updateTriggers: {
+        getTargetColor: [(tooltipContent?.content as FlightContent)?.lastSeen || null],
+        getSourceColor: [(tooltipContent?.content as FlightContent)?.lastSeen || null],
+        getWidth: [(tooltipContent?.content as FlightContent)?.lastSeen || null],
       },
     }),
   ];
@@ -225,6 +251,7 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
         views={VIEWS}
         initialViewState={INITIAL_VIEW_STATE}
         layers={renderLayers}
+        pickingRadius={3}
       >
         <StaticMap
           width='100%'

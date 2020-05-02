@@ -5,12 +5,8 @@ export interface Flight {
   lastSeen: number;
   estArrivalAirport: string;
   callsign: string;
-  estDepartureAirportHorizDistance: number;
-  estDepartureAirportVertDistance: number;
-  estArrivalAirportHorizDistance: number;
-  estArrivalAirportVertDistance: number;
-  departureAirportCandidatesCount: number;
-  arrivalAirportCandidatesCount: number;
   start: [number, number];
   end: [number, number];
+  startName: string;
+  endName: string;
 }

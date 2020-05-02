@@ -2,6 +2,7 @@ import { useStyletron } from 'baseui';
 import { Slider, State } from 'baseui/slider';
 import React, { useEffect, useState } from 'react';
 import { styled } from 'styletron-react';
+import { Label3 } from 'baseui/typography';
 
 const SliderContainer = styled('div', ({
   backgroundColor: 'rgba(31, 31, 31, 0.8)',
@@ -62,16 +63,20 @@ const DateSlider: React.FC<DateSliderProps> = ({ range, onFilter }) => {
             }),
           },
           ThumbValue: ({ $value }) => (
-            <div
-              className={css({
-                position: 'absolute',
-                top: `-${theme.sizing.scale800}`,
-                ...theme.typography.font200,
-                backgroundColor: 'transparent',
-              })}
+            <Label3
+              overrides={{
+                Block: {
+                  style: {
+                    position: 'absolute',
+                    top: `-${theme.sizing.scale800}`,
+                    ...theme.typography.font200,
+                    backgroundColor: 'transparent',
+                  },
+                },
+              }}
             >
               {(new Date(Number($value[0] * 1000))).toLocaleDateString('en-GB')}
-            </div>
+            </Label3>
           ),
           TickBar: ({ $min, $max }) => (
             <div
@@ -85,8 +90,8 @@ const DateSlider: React.FC<DateSliderProps> = ({ range, onFilter }) => {
                 paddingBottom: theme.sizing.scale400,
               })}
             >
-              <div>{convertToDayStart($min).toLocaleDateString('en-GB')}</div>
-              <div>{convertToDayEnd($max).toLocaleDateString('en-GB')}</div>
+              <Label3>{convertToDayStart($min).toLocaleDateString('en-GB')}</Label3>
+              <Label3>{convertToDayEnd($max).toLocaleDateString('en-GB')}</Label3>
             </div>
           ),
         }}
