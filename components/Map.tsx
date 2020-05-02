@@ -1,3 +1,4 @@
+import { MapView } from '@deck.gl/core';
 import { ArcLayer, ScatterplotLayer } from '@deck.gl/layers';
 import DeckGL from '@deck.gl/react';
 import { styled } from 'baseui';
@@ -5,6 +6,7 @@ import React, { useState } from 'react';
 import { StaticMap } from 'react-map-gl';
 import { Airport } from '../interfaces/airports';
 import { Flight } from '../interfaces/flight';
+import { FilterContext, PanelFilterCount } from '../interfaces/main';
 import airlines from '../utils/airlines.json';
 import airportsRaw from '../utils/airports.json';
 import DateSlider from './DateSlider';
@@ -45,17 +47,14 @@ const INITIAL_VIEW_STATE = {
   bearing: 0,
 };
 
-export interface PanelFilterCount {
-  name: string;
-  icao: string;
-  count: number;
-  checked: boolean;
-}
-
-export interface FilterContext {
-  selectedDate: number;
-  removedAirlines: string[];
-}
+const VIEWS = [
+  new MapView({
+    id: 'map',
+    width: '100%',
+    height: '100%',
+    controller: true,
+  }),
+];
 
 interface MapProps {
   flightData: Flight[];
@@ -101,11 +100,16 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
     }),
     new ArcLayer({
       id: 'flight-arcs',
-      data: filteredFlightData as any[],
+      data: filteredFlightData,
       getSourcePosition: (d) => d.start,
       getTargetPosition: (d) => d.end,
       getTargetColor: () => [213, 184, 255, 120],
-      getSourceColor: (d) => [255 * (1 - (d.end?.[0] * 2 / 10000)), 128 * (d.end?.[0] / 10000), 255 * (d.end?.[0] / 10000), 255 * (1 - (d.end?.[0] / 10000))],
+      getSourceColor: (d) => [
+        255 * (1 - (d.end?.[0] * (2 / 10000))),
+        128 * (d.end?.[0] / 10000),
+        255 * (d.end?.[0] / 10000),
+        255 * (1 - (d.end?.[0] / 10000)),
+      ],
       getWidth: 2,
       pickable: true,
       opacity: 0.8,
@@ -164,8 +168,8 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
       const { callsign } = cur;
       const airline = airlines.find((obj) => obj.icao && callsign.includes(obj.icao));
       if (!airline || !airline.name || !airline.icao) {
-        console.log(airline);
-        console.log(callsign);
+        // console.log(airline);
+        // console.log(callsign);
         return acc;
       }
       const { name, icao } = airline;
@@ -217,9 +221,8 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
   return (
     <MapContainer>
       <DeckGL
-        controller
-        width='100%'
-        height='100%'
+        // @ts-ignore
+        views={VIEWS}
         initialViewState={INITIAL_VIEW_STATE}
         layers={renderLayers}
       >

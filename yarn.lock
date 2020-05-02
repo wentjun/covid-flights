@@ -810,14 +810,6 @@
     globals "^11.1.0"
     lodash "^4.17.13"
 
-"@babel/types@7.7.4":
-  version "7.7.4"
-  resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.7.4.tgz#516570d539e44ddf308c07569c258ff94fde9193"
-  dependencies:
-    esutils "^2.0.2"
-    lodash "^4.17.13"
-    to-fast-properties "^2.0.0"
-
 "@babel/types@7.8.3":
   version "7.8.3"
   resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.8.3.tgz#5a383dffa5416db1b73dedffd311ffd0788fb31c"
@@ -834,13 +826,13 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@danmarshall/deckgl-typings@^3.4.8":
-  version "3.4.8"
-  resolved "https://registry.yarnpkg.com/@danmarshall/deckgl-typings/-/deckgl-typings-3.4.8.tgz#eb646a4234a3c77b3197268afe7f04e8995c6881"
+"@danmarshall/deckgl-typings@^4.1.4":
+  version "4.1.4"
+  resolved "https://registry.yarnpkg.com/@danmarshall/deckgl-typings/-/deckgl-typings-4.1.4.tgz#15a0b93f72ab4c017dd322d2eafc86a30f956504"
   dependencies:
     "@types/hammerjs" "^2.0.36"
     "@types/react" "*"
-    indefinitely-typed "^1.0.3"
+    indefinitely-typed "^1.1.0"
 
 "@date-io/core@^2.6.0":
   version "2.6.0"
@@ -852,31 +844,31 @@
   dependencies:
     "@date-io/core" "^2.6.0"
 
-"@deck.gl/core@^8.1.2":
-  version "8.1.2"
-  resolved "https://registry.yarnpkg.com/@deck.gl/core/-/core-8.1.2.tgz#fbc48335e27636eb23f9565946b7d38ed75cbfbd"
+"@deck.gl/core@^8.1.4":
+  version "8.1.4"
+  resolved "https://registry.yarnpkg.com/@deck.gl/core/-/core-8.1.4.tgz#ed1a569f750471c0b2ce9d31f874f61f63bb4c21"
   dependencies:
     "@loaders.gl/core" "^2.1.1"
     "@loaders.gl/images" "^2.1.1"
-    "@luma.gl/core" "^8.1.0"
+    "@luma.gl/core" "^8.1.2"
     "@math.gl/web-mercator" "^3.1.3"
     gl-matrix "^3.0.0"
     math.gl "^3.1.2"
     mjolnir.js "^2.3.0"
     probe.gl "^3.2.1"
 
-"@deck.gl/layers@^8.1.2":
-  version "8.1.2"
-  resolved "https://registry.yarnpkg.com/@deck.gl/layers/-/layers-8.1.2.tgz#c2ddc2b79b45a584c9ad488ba0948c11e26f5b92"
+"@deck.gl/layers@^8.1.4":
+  version "8.1.4"
+  resolved "https://registry.yarnpkg.com/@deck.gl/layers/-/layers-8.1.4.tgz#ccf8efa25ba5dc0050e6e1f5931add5f19a20c02"
   dependencies:
     "@loaders.gl/core" "^2.1.1"
     "@loaders.gl/images" "^2.1.1"
     "@mapbox/tiny-sdf" "^1.1.0"
     earcut "^2.0.6"
 
-"@deck.gl/react@^8.1.2":
-  version "8.1.2"
-  resolved "https://registry.yarnpkg.com/@deck.gl/react/-/react-8.1.2.tgz#b47a06a3e08e7c43497beb05589fdf6752a568d3"
+"@deck.gl/react@^8.1.4":
+  version "8.1.4"
+  resolved "https://registry.yarnpkg.com/@deck.gl/react/-/react-8.1.4.tgz#abbe8cf523f9980688b99b9e49f66a2fd34c573d"
   dependencies:
     prop-types "^15.6.0"
 
@@ -900,54 +892,54 @@
     "@babel/runtime" "^7.3.1"
     "@probe.gl/stats" "^3.2.1"
 
-"@luma.gl/constants@8.1.1":
-  version "8.1.1"
-  resolved "https://registry.yarnpkg.com/@luma.gl/constants/-/constants-8.1.1.tgz#75ad54d9ccbb92e21e12d8b16619f94da6661204"
+"@luma.gl/constants@8.1.2":
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/@luma.gl/constants/-/constants-8.1.2.tgz#729fb10ba6dc6946ccb2745f4b4d22c2f4b021d7"
 
-"@luma.gl/core@^8.1.0":
-  version "8.1.1"
-  resolved "https://registry.yarnpkg.com/@luma.gl/core/-/core-8.1.1.tgz#ea222343649f5d7923f7208fae510c72113a9584"
+"@luma.gl/core@^8.1.2":
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/@luma.gl/core/-/core-8.1.2.tgz#9d0b3c50b3aaf86adcef0318191611ba32a05f82"
   dependencies:
     "@babel/runtime" "^7.0.0"
-    "@luma.gl/constants" "8.1.1"
-    "@luma.gl/engine" "8.1.1"
-    "@luma.gl/shadertools" "8.1.1"
-    "@luma.gl/webgl" "8.1.1"
+    "@luma.gl/constants" "8.1.2"
+    "@luma.gl/engine" "8.1.2"
+    "@luma.gl/shadertools" "8.1.2"
+    "@luma.gl/webgl" "8.1.2"
 
-"@luma.gl/engine@8.1.1":
-  version "8.1.1"
-  resolved "https://registry.yarnpkg.com/@luma.gl/engine/-/engine-8.1.1.tgz#8db4b4e7d13ff68246962c702663bcca0410d205"
+"@luma.gl/engine@8.1.2":
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/@luma.gl/engine/-/engine-8.1.2.tgz#0874378efc30c392a6b0182dd57a9eeed45ee110"
   dependencies:
     "@babel/runtime" "^7.0.0"
-    "@luma.gl/constants" "8.1.1"
-    "@luma.gl/gltools" "8.1.1"
-    "@luma.gl/shadertools" "8.1.1"
-    "@luma.gl/webgl" "8.1.1"
+    "@luma.gl/constants" "8.1.2"
+    "@luma.gl/gltools" "8.1.2"
+    "@luma.gl/shadertools" "8.1.2"
+    "@luma.gl/webgl" "8.1.2"
     math.gl "^3.1.3"
     probe.gl "^3.2.1"
 
-"@luma.gl/gltools@8.1.1":
-  version "8.1.1"
-  resolved "https://registry.yarnpkg.com/@luma.gl/gltools/-/gltools-8.1.1.tgz#1d346233d9a57acc4f8fc6b62dc41b75a9f9f288"
+"@luma.gl/gltools@8.1.2":
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/@luma.gl/gltools/-/gltools-8.1.2.tgz#cf169322b573a1e0ae3390061da40b397b7e15e6"
   dependencies:
     "@babel/runtime" "^7.0.0"
-    "@luma.gl/constants" "8.1.1"
+    "@luma.gl/constants" "8.1.2"
     probe.gl "^3.2.1"
 
-"@luma.gl/shadertools@8.1.1":
-  version "8.1.1"
-  resolved "https://registry.yarnpkg.com/@luma.gl/shadertools/-/shadertools-8.1.1.tgz#a8c503622384ddd1118dddf07760ec5e1bcf4aff"
+"@luma.gl/shadertools@8.1.2":
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/@luma.gl/shadertools/-/shadertools-8.1.2.tgz#e972a7f3e30ed06662780db5bd4f25f616203c11"
   dependencies:
     "@babel/runtime" "^7.0.0"
     math.gl "^3.1.3"
 
-"@luma.gl/webgl@8.1.1":
-  version "8.1.1"
-  resolved "https://registry.yarnpkg.com/@luma.gl/webgl/-/webgl-8.1.1.tgz#148acd2085d23de2a7e9a565c7b8d5883da77e53"
+"@luma.gl/webgl@8.1.2":
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/@luma.gl/webgl/-/webgl-8.1.2.tgz#ae699db5b231ae4cdd31366b7f303ef94ed94702"
   dependencies:
     "@babel/runtime" "^7.0.0"
-    "@luma.gl/constants" "8.1.1"
-    "@luma.gl/gltools" "8.1.1"
+    "@luma.gl/constants" "8.1.2"
+    "@luma.gl/gltools" "8.1.2"
     probe.gl "^3.2.1"
 
 "@mapbox/geojson-area@0.2.2":
@@ -1013,6 +1005,10 @@
     "@babel/runtime" "^7.0.0"
     gl-matrix "^3.0.0"
 
+"@next/react-refresh-utils@9.3.6":
+  version "9.3.6"
+  resolved "https://registry.yarnpkg.com/@next/react-refresh-utils/-/react-refresh-utils-9.3.6.tgz#a5eb91b4b8270fecb5fcf2d1319d8d04f0cf6f75"
+
 "@probe.gl/stats@3.2.1", "@probe.gl/stats@^3.2.1":
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/@probe.gl/stats/-/stats-3.2.1.tgz#4e95c75513229ebb01384045e89524a466c022eb"
@@ -1065,15 +1061,15 @@
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
 
-"@types/react-dom@^16.9.4":
-  version "16.9.6"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.9.6.tgz#9e7f83d90566521cc2083be2277c6712dcaf754c"
+"@types/react-dom@^16.9.7":
+  version "16.9.7"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.9.7.tgz#60844d48ce252d7b2dccf0c7bb937130e27c0cd2"
   dependencies:
     "@types/react" "*"
 
-"@types/react-map-gl@^5.2.2":
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/@types/react-map-gl/-/react-map-gl-5.2.2.tgz#21b61427a70759f68e57fa597532d5c4e0204a6e"
+"@types/react-map-gl@^5.2.3":
+  version "5.2.3"
+  resolved "https://registry.yarnpkg.com/@types/react-map-gl/-/react-map-gl-5.2.3.tgz#a18564c1056d22be36461ba94d7c1426dfe06402"
   dependencies:
     "@types/geojson" "*"
     "@types/mapbox-gl" "*"
@@ -1112,11 +1108,11 @@
   dependencies:
     "@types/gl-matrix" "*"
 
-"@typescript-eslint/eslint-plugin@^2.29.0":
-  version "2.29.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-2.29.0.tgz#c9efab7624e3dd6d144a0e4577a541d1bd42c2ac"
+"@typescript-eslint/eslint-plugin@^2.30.0":
+  version "2.30.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-2.30.0.tgz#312a37e80542a764d96e8ad88a105316cdcd7b05"
   dependencies:
-    "@typescript-eslint/experimental-utils" "2.29.0"
+    "@typescript-eslint/experimental-utils" "2.30.0"
     functional-red-black-tree "^1.0.1"
     regexpp "^3.0.0"
     tsutils "^3.17.1"
@@ -1130,7 +1126,16 @@
     eslint-scope "^5.0.0"
     eslint-utils "^2.0.0"
 
-"@typescript-eslint/parser@^2.24.0", "@typescript-eslint/parser@^2.29.0":
+"@typescript-eslint/experimental-utils@2.30.0":
+  version "2.30.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/experimental-utils/-/experimental-utils-2.30.0.tgz#9845e868c01f3aed66472c561d4b6bac44809dd0"
+  dependencies:
+    "@types/json-schema" "^7.0.3"
+    "@typescript-eslint/typescript-estree" "2.30.0"
+    eslint-scope "^5.0.0"
+    eslint-utils "^2.0.0"
+
+"@typescript-eslint/parser@^2.24.0":
   version "2.29.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-2.29.0.tgz#6e3c4e21ed6393dc05b9d8b47f0b7e731ef21c9c"
   dependencies:
@@ -1139,9 +1144,30 @@
     "@typescript-eslint/typescript-estree" "2.29.0"
     eslint-visitor-keys "^1.1.0"
 
+"@typescript-eslint/parser@^2.30.0":
+  version "2.30.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-2.30.0.tgz#7681c305a6f4341ae2579f5e3a75846c29eee9ce"
+  dependencies:
+    "@types/eslint-visitor-keys" "^1.0.0"
+    "@typescript-eslint/experimental-utils" "2.30.0"
+    "@typescript-eslint/typescript-estree" "2.30.0"
+    eslint-visitor-keys "^1.1.0"
+
 "@typescript-eslint/typescript-estree@2.29.0":
   version "2.29.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/typescript-estree/-/typescript-estree-2.29.0.tgz#1be6612bb02fc37ac9f466521c1459a4744e8d3a"
+  dependencies:
+    debug "^4.1.1"
+    eslint-visitor-keys "^1.1.0"
+    glob "^7.1.6"
+    is-glob "^4.0.1"
+    lodash "^4.17.15"
+    semver "^6.3.0"
+    tsutils "^3.17.1"
+
+"@typescript-eslint/typescript-estree@2.30.0":
+  version "2.30.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/typescript-estree/-/typescript-estree-2.30.0.tgz#1b8e848b55144270255ffbfe4c63291f8f766615"
   dependencies:
     debug "^4.1.1"
     eslint-visitor-keys "^1.1.0"
@@ -1290,7 +1316,7 @@ acorn-jsx@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-5.2.0.tgz#4c66069173d6fdd68ed85239fc256226182b2ebe"
 
-acorn@^6.2.1:
+acorn@^6.4.1:
   version "6.4.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.4.1.tgz#531e58ba3f51b9dacb9a6646ca4debf5b14ca474"
 
@@ -1541,9 +1567,9 @@ base@^0.11.1:
     mixin-deep "^1.2.0"
     pascalcase "^0.1.1"
 
-baseui@^9.72.0:
-  version "9.72.0"
-  resolved "https://registry.yarnpkg.com/baseui/-/baseui-9.72.0.tgz#862654e9dfe81ee7faa897f1e32fd486171bd04e"
+baseui@^9.73.2:
+  version "9.73.2"
+  resolved "https://registry.yarnpkg.com/baseui/-/baseui-9.73.2.tgz#d85e236f4f305a39fb4d9e5e17f1fb27e40832cc"
   dependencies:
     "@date-io/date-fns" "^2.4.0"
     card-validator "^6.2.0"
@@ -1559,7 +1585,7 @@ baseui@^9.72.0:
     react-is "^16.8.6"
     react-movable "^2.4.0"
     react-multi-ref "^1.0.0"
-    react-range "^1.6.0"
+    react-range "^1.6.1"
     react-virtualized "^9.21.1"
     react-virtualized-auto-sizer "^1.0.2"
     react-window "^1.8.5"
@@ -2151,22 +2177,23 @@ css-in-js-utils@^2.0.0:
     hyphenate-style-name "^1.0.2"
     isobject "^3.0.1"
 
-css-loader@3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/css-loader/-/css-loader-3.3.0.tgz#65f889807baec3197313965d6cda9899f936734d"
+css-loader@3.5.3:
+  version "3.5.3"
+  resolved "https://registry.yarnpkg.com/css-loader/-/css-loader-3.5.3.tgz#95ac16468e1adcd95c844729e0bb167639eb0bcf"
   dependencies:
     camelcase "^5.3.1"
     cssesc "^3.0.0"
     icss-utils "^4.1.1"
     loader-utils "^1.2.3"
     normalize-path "^3.0.0"
-    postcss "^7.0.23"
+    postcss "^7.0.27"
     postcss-modules-extract-imports "^2.0.0"
     postcss-modules-local-by-default "^3.0.2"
-    postcss-modules-scope "^2.1.1"
+    postcss-modules-scope "^2.2.0"
     postcss-modules-values "^3.0.0"
-    postcss-value-parser "^4.0.2"
-    schema-utils "^2.6.0"
+    postcss-value-parser "^4.0.3"
+    schema-utils "^2.6.6"
+    semver "^6.3.0"
 
 css-select-base-adapter@^0.1.1:
   version "0.1.1"
@@ -2607,9 +2634,9 @@ eslint-module-utils@^2.4.1:
     debug "^2.6.9"
     pkg-dir "^2.0.0"
 
-eslint-plugin-baseui@^9.72.0:
-  version "9.72.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-baseui/-/eslint-plugin-baseui-9.72.0.tgz#929d07af4b79a471b13d915de3ac8237e11ee725"
+eslint-plugin-baseui@^9.73.2:
+  version "9.73.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-baseui/-/eslint-plugin-baseui-9.73.2.tgz#a2871e8dc3840207243b47697e2323a2c4e97e3b"
 
 eslint-plugin-import@^2.20.2:
   version "2.20.2"
@@ -2642,9 +2669,9 @@ eslint-plugin-jsx-a11y@^6.2.3:
     has "^1.0.3"
     jsx-ast-utils "^2.2.1"
 
-eslint-plugin-react-hooks@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-3.0.0.tgz#9e80c71846eb68dd29c3b21d832728aa66e5bd35"
+eslint-plugin-react-hooks@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-4.0.0.tgz#81196b990043cde339e25c6662aeebe32ac52d01"
 
 eslint-plugin-react@^7.19.0:
   version "7.19.0"
@@ -3233,7 +3260,7 @@ imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
 
-indefinitely-typed@^1.0.3:
+indefinitely-typed@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/indefinitely-typed/-/indefinitely-typed-1.1.0.tgz#d0acd3645445e89ae1c70129be21609a0aa5a114"
   dependencies:
@@ -3644,7 +3671,7 @@ loader-utils@1.2.3:
     emojis-list "^2.0.0"
     json5 "^1.0.1"
 
-loader-utils@2.0.0:
+loader-utils@2.0.0, loader-utils@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-2.0.0.tgz#e4cace5b816d425a166b5f097e10cd12b36064b0"
   dependencies:
@@ -3973,9 +4000,9 @@ next-tick@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
 
-next@latest:
-  version "9.3.5"
-  resolved "https://registry.yarnpkg.com/next/-/next-9.3.5.tgz#c9ff01147d3c9e165efdaa2cec1702b5741f5ac7"
+next@9.3.6:
+  version "9.3.6"
+  resolved "https://registry.yarnpkg.com/next/-/next-9.3.6.tgz#2bfd76f835606db3840adf07b51b052514ef3709"
   dependencies:
     "@ampproject/toolbox-optimizer" "2.2.0"
     "@babel/core" "7.7.2"
@@ -3993,12 +4020,12 @@ next@latest:
     "@babel/preset-react" "7.7.0"
     "@babel/preset-typescript" "7.7.2"
     "@babel/runtime" "7.7.2"
-    "@babel/types" "7.7.4"
+    "@next/react-refresh-utils" "9.3.6"
     babel-plugin-syntax-jsx "6.18.0"
     babel-plugin-transform-define "2.0.0"
     babel-plugin-transform-react-remove-prop-types "0.4.24"
     browserslist "4.8.3"
-    css-loader "3.3.0"
+    css-loader "3.5.3"
     find-cache-dir "3.3.1"
     fork-ts-checker-webpack-plugin "3.1.1"
     jest-worker "24.9.0"
@@ -4011,13 +4038,14 @@ next@latest:
     prop-types "15.7.2"
     prop-types-exact "1.2.0"
     react-is "16.8.6"
+    react-refresh "0.8.1"
     resolve-url-loader "3.1.1"
     sass-loader "8.0.2"
-    style-loader "1.0.0"
+    style-loader "1.2.0"
     styled-jsx "3.2.5"
     use-subscription "1.1.1"
     watchpack "2.0.0-beta.13"
-    webpack "4.42.1"
+    webpack "4.43.0"
     webpack-sources "1.4.3"
 
 nice-try@^1.0.4:
@@ -4523,7 +4551,7 @@ postcss-modules-local-by-default@^3.0.2:
     postcss-selector-parser "^6.0.2"
     postcss-value-parser "^4.0.0"
 
-postcss-modules-scope@^2.1.1:
+postcss-modules-scope@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/postcss-modules-scope/-/postcss-modules-scope-2.2.0.tgz#385cae013cc7743f5a7d7602d1073a89eaae62ee"
   dependencies:
@@ -4682,6 +4710,10 @@ postcss-value-parser@^4.0.0, postcss-value-parser@^4.0.2:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-4.0.3.tgz#651ff4593aa9eda8d5d0d66593a2417aeaeb325d"
 
+postcss-value-parser@^4.0.3:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-4.1.0.tgz#443f6a20ced6481a2bda4fa8532a6e55d789a2cb"
+
 postcss@7.0.21:
   version "7.0.21"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-7.0.21.tgz#06bb07824c19c2021c5d056d5b10c35b989f7e17"
@@ -4690,7 +4722,7 @@ postcss@7.0.21:
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
-postcss@7.0.27, postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.16, postcss@^7.0.23, postcss@^7.0.26, postcss@^7.0.27, postcss@^7.0.5, postcss@^7.0.6:
+postcss@7.0.27, postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.16, postcss@^7.0.26, postcss@^7.0.27, postcss@^7.0.5, postcss@^7.0.6:
   version "7.0.27"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-7.0.27.tgz#cc67cdc6b0daa375105b7c424a85567345fc54d9"
   dependencies:
@@ -4924,9 +4956,13 @@ react-multi-ref@^1.0.0:
   dependencies:
     "@babel/runtime" "^7.1.2"
 
-react-range@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/react-range/-/react-range-1.6.0.tgz#9f7435402fbcf221fb178f4bbdc6a36052c89da0"
+react-range@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/react-range/-/react-range-1.6.1.tgz#cfebc8c41acc9f4f948f8da20204f9c662b8c46c"
+
+react-refresh@0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.8.1.tgz#5500506ad6fc891fdd057d0bf3581f9310abc6a2"
 
 react-virtualized-auto-sizer@^1.0.2:
   version "1.0.2"
@@ -5254,7 +5290,7 @@ schema-utils@^1.0.0:
     ajv-errors "^1.0.0"
     ajv-keywords "^3.1.0"
 
-schema-utils@^2.0.1, schema-utils@^2.6.0, schema-utils@^2.6.1:
+schema-utils@^2.6.1, schema-utils@^2.6.6:
   version "2.6.6"
   resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-2.6.6.tgz#299fe6bd4a3365dc23d99fd446caff8f1d6c330c"
   dependencies:
@@ -5602,12 +5638,12 @@ strip-json-comments@^3.0.1:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-3.1.0.tgz#7638d31422129ecf4457440009fba03f9f9ac180"
 
-style-loader@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/style-loader/-/style-loader-1.0.0.tgz#1d5296f9165e8e2c85d24eee0b7caf9ec8ca1f82"
+style-loader@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/style-loader/-/style-loader-1.2.0.tgz#f78e4d49caf5018f7c03ae1886e1270124feeb0a"
   dependencies:
-    loader-utils "^1.2.3"
-    schema-utils "^2.0.1"
+    loader-utils "^2.0.0"
+    schema-utils "^2.6.6"
 
 styled-jsx@3.2.5:
   version "3.2.5"
@@ -6055,7 +6091,7 @@ watchpack@2.0.0-beta.13:
     glob-to-regexp "^0.4.1"
     graceful-fs "^4.1.2"
 
-watchpack@^1.6.0:
+watchpack@^1.6.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/watchpack/-/watchpack-1.6.1.tgz#280da0a8718592174010c078c7585a74cd8cd0e2"
   dependencies:
@@ -6070,15 +6106,15 @@ webpack-sources@1.4.3, webpack-sources@^1.1.0, webpack-sources@^1.4.0, webpack-s
     source-list-map "^2.0.0"
     source-map "~0.6.1"
 
-webpack@4.42.1:
-  version "4.42.1"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.42.1.tgz#ae707baf091f5ca3ef9c38b884287cfe8f1983ef"
+webpack@4.43.0:
+  version "4.43.0"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.43.0.tgz#c48547b11d563224c561dad1172c8aa0b8a678e6"
   dependencies:
     "@webassemblyjs/ast" "1.9.0"
     "@webassemblyjs/helper-module-context" "1.9.0"
     "@webassemblyjs/wasm-edit" "1.9.0"
     "@webassemblyjs/wasm-parser" "1.9.0"
-    acorn "^6.2.1"
+    acorn "^6.4.1"
     ajv "^6.10.2"
     ajv-keywords "^3.4.1"
     chrome-trace-event "^1.0.2"
@@ -6095,7 +6131,7 @@ webpack@4.42.1:
     schema-utils "^1.0.0"
     tapable "^1.1.3"
     terser-webpack-plugin "^1.4.3"
-    watchpack "^1.6.0"
+    watchpack "^1.6.1"
     webpack-sources "^1.4.1"
 
 wgs84@0.0.0:

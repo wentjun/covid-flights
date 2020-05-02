@@ -1,10 +1,10 @@
 import { styled } from 'baseui';
+import { Accordion, Panel } from 'baseui/accordion';
 import { Checkbox, LABEL_PLACEMENT } from 'baseui/checkbox';
 import { Display4, Label1, Label2 } from 'baseui/typography';
 import React, { useEffect, useState } from 'react';
-import { Accordion, Panel } from 'baseui/accordion';
 import { Flight } from '../interfaces/flight';
-import { FilterContext, PanelFilterCount } from './Map';
+import { FilterContext, PanelFilterCount } from '../interfaces/main';
 
 const InformationPanelContent = styled('div', ({
   flex: 1,
