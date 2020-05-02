@@ -41,6 +41,15 @@ const InformationPanel: React.FC<InformationPanelProps> = ({
   const [isAccordionExpanded, setIsAccordionExpanded] = useState(false);
 
   useEffect(() => {
+    const viewportWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    if (viewportWidth < 768) {
+      return;
+    }
+    // set accordion as expanded by default for medium screens and above
+    setIsAccordionExpanded(true);
+  }, []);
+
+  useEffect(() => {
     if (!panelFilter) {
       return;
     }
@@ -108,7 +117,6 @@ const InformationPanel: React.FC<InformationPanelProps> = ({
           },
         }}
       >
-        {/* <InformationPanelContainer> */}
         <CurrentDate>{new Date(selectedDate * 1000).toLocaleDateString('en-GB')}</CurrentDate>
         <Summary>
           <SummaryTitle>Summary</SummaryTitle>
@@ -119,27 +127,26 @@ const InformationPanel: React.FC<InformationPanelProps> = ({
         <AirlinesFilterTitle>Airlines</AirlinesFilterTitle>
         <InformationPanelContent>
           {
-              localPanelFilter
-                .sort(({ count }, { count: countB }) => countB - count)
-                .map(({
-                  count, checked, name, icao,
-                }) => (
-                  <Checkbox
-                    checked={checked}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChecked(icao, e)}
-                    labelPlacement={LABEL_PLACEMENT.right}
-                    key={icao}
-                  >
-                    {name}
-                    {' '}
-                    (
-                    {count}
-                    )
-                  </Checkbox>
-                )).sort()
-              }
+            localPanelFilter
+              .sort(({ count }, { count: countB }) => countB - count)
+              .map(({
+                count, checked, name, icao,
+              }) => (
+                <Checkbox
+                  checked={checked}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChecked(icao, e)}
+                  labelPlacement={LABEL_PLACEMENT.right}
+                  key={icao}
+                >
+                  {name}
+                  {' '}
+                  (
+                  {count}
+                  )
+                </Checkbox>
+              ))
+            }
         </InformationPanelContent>
-        {/* </InformationPanelContainer> */}
       </Panel>
     </Accordion>
   );
