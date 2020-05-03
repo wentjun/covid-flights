@@ -1,5 +1,5 @@
 import { styled } from 'baseui';
-import { Accordion, Panel } from 'baseui/accordion';
+import { Panel, StatelessAccordion } from 'baseui/accordion';
 import { Checkbox, LABEL_PLACEMENT } from 'baseui/checkbox';
 import { Display4, Label1, Label2 } from 'baseui/typography';
 import React, { useEffect, useState } from 'react';
@@ -38,7 +38,7 @@ const InformationPanel: React.FC<InformationPanelProps> = ({
   filterContext: { selectedDate }, panelFilter, data, onAirlineFilter,
 }) => {
   const [localPanelFilter, setPanelFilter] = useState< PanelFilterCount[]>([]);
-  const [isAccordionExpanded, setIsAccordionExpanded] = useState(false);
+  const [isAccordionExpanded, setIsAccordionExpanded] = useState<React.Key[]>([]);
 
   useEffect(() => {
     const viewportWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
@@ -46,7 +46,7 @@ const InformationPanel: React.FC<InformationPanelProps> = ({
       return;
     }
     // set accordion as expanded by default for medium screens and above
-    setIsAccordionExpanded(true);
+    setIsAccordionExpanded(['controlPanel']);
   }, []);
 
   useEffect(() => {
@@ -71,21 +71,21 @@ const InformationPanel: React.FC<InformationPanelProps> = ({
     }));
   };
 
+  const isControlPanelExpanded = () => isAccordionExpanded.includes('controlPanel');
+
   return (
-    <Accordion
-      // renderAll
-      onChange={() => setIsAccordionExpanded(!isAccordionExpanded)}
+    <StatelessAccordion
+      expanded={isAccordionExpanded}
+      onChange={({ expanded }) => setIsAccordionExpanded(expanded)}
       overrides={{
         Root: {
           style: ({ $theme }) => ({
             alignSelf: 'flex-start',
             boxSizing: 'border-box',
-            height: isAccordionExpanded ? '60vh' : '',
             width: '100%',
             zIndex: 1,
 
             '@media (min-width: 768px)': {
-              height: isAccordionExpanded ? 'calc(100vh - 2rem)' : '',
               marginBottom: $theme.sizing.scale600,
               marginLeft: $theme.sizing.scale600,
               marginRight: $theme.sizing.scale600,
@@ -98,13 +98,17 @@ const InformationPanel: React.FC<InformationPanelProps> = ({
     >
       <Panel
         title='Control Panel'
-        expanded={isAccordionExpanded}
+        key='controlPanel'
         overrides={{
           PanelContainer: {
             style: () => ({
               display: 'flex',
               flexDirection: 'column',
-              height: '100%',
+              height: isControlPanelExpanded() ? '65vh' : '',
+
+              '@media (min-width: 768px)': {
+                height: isControlPanelExpanded() ? 'calc(100vh - 2rem)' : '',
+              },
             }),
           },
           Content: {
@@ -123,7 +127,6 @@ const InformationPanel: React.FC<InformationPanelProps> = ({
           <Display4>{data.length}</Display4>
           <Label2>flights</Label2>
         </Summary>
-
         <AirlinesFilterTitle>Airlines</AirlinesFilterTitle>
         <InformationPanelContent>
           {
@@ -148,7 +151,7 @@ const InformationPanel: React.FC<InformationPanelProps> = ({
             }
         </InformationPanelContent>
       </Panel>
-    </Accordion>
+    </StatelessAccordion>
   );
 };
 export default InformationPanel;

@@ -1,5 +1,5 @@
 import { Label2, Paragraph3 } from 'baseui/typography';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { styled } from 'styletron-react';
 import { Airport } from '../interfaces/airports';
 
@@ -34,14 +34,14 @@ export interface FlightContent {
 export interface TooltipContent {
   x: number;
   y: number;
-  content: Airport | FlightContent;
+  content: Airport | FlightContent[];
   type: 'airport' | 'flight';
 }
 
 // custom typeguards for Airport and Flight types
-const isAirport = (airport: Airport | FlightContent): airport is Airport => (airport as Airport).icao !== undefined;
-const isFlight = (flight: Airport | FlightContent): flight is FlightContent => (
-  (flight as FlightContent).callsign !== undefined
+const isAirport = (airport: Airport | FlightContent[]): airport is Airport => (airport as Airport).icao !== undefined;
+const isFlight = (flights: Airport | FlightContent[]): flights is FlightContent[] => (
+  (flights as FlightContent[]).some(({ callsign }) => callsign !== undefined)
 );
 
 export const ToolTip: React.FC<TooltipContent> = ({
@@ -58,22 +58,26 @@ export const ToolTip: React.FC<TooltipContent> = ({
       </>
     )}
     {type === 'flight' && isFlight(content) && (
-      <>
-        <Label2>
-          {content.departureAirport}
-          {' '}
-          to
-          {' '}
-          {content.arrivalAirport}
-        </Label2>
-        <Paragraph3>
-          {content.callsign}
-          <br />
-          {new Date(content.firstSeen * 1000).toLocaleString('en-GB')}
-          <br />
-          {new Date(content.lastSeen * 1000).toLocaleString('en-GB')}
-        </Paragraph3>
-      </>
+      content.map(({
+        departureAirport, arrivalAirport, callsign, firstSeen, lastSeen,
+      }) => (
+        <Fragment key={callsign}>
+          <Label2>
+            {departureAirport}
+            {' '}
+            to
+            {' '}
+            {arrivalAirport}
+          </Label2>
+          <Paragraph3>
+            {callsign}
+            <br />
+            {new Date(firstSeen * 1000).toLocaleString('en-GB')}
+            <br />
+            {new Date(lastSeen * 1000).toLocaleString('en-GB')}
+          </Paragraph3>
+        </Fragment>
+      ))
     )}
   </StyledTooltip>
 );

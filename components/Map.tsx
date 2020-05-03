@@ -2,8 +2,9 @@ import { MapView } from '@deck.gl/core';
 import { ArcLayer, ScatterplotLayer } from '@deck.gl/layers';
 import DeckGL from '@deck.gl/react';
 import { styled } from 'baseui';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { StaticMap } from 'react-map-gl';
+import { PickInfo } from '@deck.gl/core/lib/deck';
 import { Airport } from '../interfaces/airports';
 import { Flight } from '../interfaces/flight';
 import { FilterContext, PanelFilterCount } from '../interfaces/main';
@@ -77,6 +78,39 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
     selectedDate: timeRange[1],
     removedAirlines: [],
   });
+  const deckRef = useRef<DeckGL>(null);
+
+  /**
+   * assigns flight arc objects to tooltip
+   * @param param0 Info object for Flight arc
+   */
+  const onArcHover = ({ x, y, object }: PickInfo<Flight>) => {
+    if (!object) {
+      setTooltipContent(undefined);
+      return;
+    }
+    const layers: PickInfo<Flight>[] = deckRef?.current?.pickObjects({
+      x,
+      y,
+    });
+    const content = layers.map(({
+      object: {
+        callsign, firstSeen, lastSeen, startName, endName,
+      },
+    }) => ({
+      callsign,
+      firstSeen,
+      lastSeen,
+      arrivalAirport: endName,
+      departureAirport: startName,
+    }));
+    setTooltipContent({
+      x,
+      y,
+      content,
+      type: 'flight',
+    });
+  };
 
   const renderLayers = [
     new ScatterplotLayer<Airport>({
@@ -85,7 +119,6 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
       radiusScale: 20,
       getPosition: (d) => d.coordinates as [number, number],
       getFillColor: [255, 140, 0],
-      // getRadius: (d) => getSize(d.type),
       getRadius: 60,
       pickable: true,
       onHover: ({ x, y, object }) => {
@@ -103,17 +136,16 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
       getSourcePosition: (d) => d.start,
       getTargetPosition: (d) => d.end,
       getTargetColor: (e) => (
-        (tooltipContent?.content as FlightContent)?.lastSeen === e?.lastSeen
+        (tooltipContent?.content as FlightContent[])?.some(({ callsign }: FlightContent) => callsign === e.callsign)
           ? [0, 181, 204]
-          : [231, 76, 60, 120]
-      ),
+          : [231, 76, 60, 120]),
       getSourceColor: (e) => (
-        (tooltipContent?.content as FlightContent)?.lastSeen === e?.lastSeen
+        (tooltipContent?.content as FlightContent[])?.some(({ callsign }: FlightContent) => callsign === e.callsign)
           ? [0, 181, 204, 120]
           : [255, 128, 255, 120]
       ),
       getWidth: (e) => (
-        (tooltipContent?.content as FlightContent)?.lastSeen === e?.lastSeen
+        (tooltipContent?.content as FlightContent[])?.some(({ callsign }: FlightContent) => callsign === e.callsign)
           ? 3
           : 2
       ),
@@ -121,33 +153,20 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
       opacity: 0.8,
       getHeight: 0.1,
       getTilt: 50,
-      onHover: ({ x, y, object }) => {
-        if (!object) {
-          setTooltipContent(undefined);
-          return;
-        }
-        const {
-          callsign, firstSeen, lastSeen, startName, endName,
-        } = object;
-
-        const content: FlightContent = {
-          callsign,
-          firstSeen,
-          lastSeen,
-          arrivalAirport: endName,
-          departureAirport: startName,
-        };
-        setTooltipContent({
-          x,
-          y,
-          content,
-          type: 'flight',
-        });
-      },
+      onHover: onArcHover,
       updateTriggers: {
-        getTargetColor: [(tooltipContent?.content as FlightContent)?.lastSeen || null],
-        getSourceColor: [(tooltipContent?.content as FlightContent)?.lastSeen || null],
-        getWidth: [(tooltipContent?.content as FlightContent)?.lastSeen || null],
+        getTargetColor: [
+          ((tooltipContent?.content as FlightContent[]) ?? []).find(({ callsign }: FlightContent) => callsign)?.callsign
+          || null,
+        ],
+        getSourceColor: [
+          ((tooltipContent?.content as FlightContent[]) ?? []).find(({ callsign }: FlightContent) => callsign)?.callsign
+          || null,
+        ],
+        getWidth: [
+          (tooltipContent?.content as FlightContent[])?.find(({ callsign }: FlightContent) => callsign)?.callsign
+         || null,
+        ],
       },
     }),
   ];
@@ -252,6 +271,7 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
         initialViewState={INITIAL_VIEW_STATE}
         layers={renderLayers}
         pickingRadius={3}
+        ref={deckRef}
       >
         <StaticMap
           width='100%'
