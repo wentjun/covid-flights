@@ -3,7 +3,7 @@ import { Slider, State } from 'baseui/slider';
 import { Label3 } from 'baseui/typography';
 import React, { useEffect, useState, useCallback } from 'react';
 import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, tap } from 'rxjs/operators';
 import { styled } from 'styletron-react';
 
 const SliderContainer = styled('div', ({
@@ -40,7 +40,7 @@ const DateSlider: React.FC<DateSliderProps> = ({ range, onFilter }) => {
   const [filteredDate, setFilteredDate] = useState([max]);
 
   const handleChange = useCallback(({ value }: State) => {
-    setFilteredDate(value);
+    // setFilteredDate(value);
     onFilter(value[0]);
   }, [onFilter]);
 
@@ -53,6 +53,7 @@ const DateSlider: React.FC<DateSliderProps> = ({ range, onFilter }) => {
 
   useEffect(() => {
     onSlide.pipe(
+      tap(({ value }) => setFilteredDate(value)),
       debounceTime(100),
     ).subscribe(handleChange);
   }, [handleChange, onSlide]);

@@ -211,7 +211,8 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
 
     const calculated: PanelFilterCount[] = dateFilteredFlights.reduce((acc, cur) => {
       const { callsign } = cur;
-      const airline = airlines.find((obj) => obj.icao && callsign.includes(obj.icao));
+
+      const airline = airlines.find((obj) => callsign && obj.icao && callsign.includes(obj.icao));
       if (!airline || !airline.name || !airline.icao) {
         // console.log(airline);
         // console.log(callsign);
