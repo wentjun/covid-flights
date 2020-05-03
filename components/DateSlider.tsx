@@ -1,16 +1,18 @@
 import { useStyletron } from 'baseui';
 import { Slider, State } from 'baseui/slider';
-import React, { useEffect, useState } from 'react';
-import { styled } from 'styletron-react';
 import { Label3 } from 'baseui/typography';
+import React, { useEffect, useState, useCallback } from 'react';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+import { styled } from 'styletron-react';
 
 const SliderContainer = styled('div', ({
+  alignItems: 'center',
   backgroundColor: 'rgba(31, 31, 31, 0.8)',
-  zIndex: 1,
-  width: '100%',
   display: 'flex',
   justifyContent: 'center',
-  alignItems: 'center',
+  width: '100%',
+  zIndex: 1,
 
   '@media (min-width: 768px)': {
     flex: 1,
@@ -24,6 +26,7 @@ interface DateSliderProps {
 }
 
 const DateSlider: React.FC<DateSliderProps> = ({ range, onFilter }) => {
+  const onSlide = new Subject<State>();
   const convertToDayStart = (epochTime: number) => new Date(new Date(Number(epochTime * 1000)).setHours(0, 0, 0));
   const convertToDayEnd = (epochTime: number) => {
     const nextDay = new Date(Number(epochTime * 1000));
@@ -36,10 +39,10 @@ const DateSlider: React.FC<DateSliderProps> = ({ range, onFilter }) => {
   const [css, theme] = useStyletron();
   const [filteredDate, setFilteredDate] = useState([max]);
 
-  const handleChange = ({ value }: State) => {
+  const handleChange = useCallback(({ value }: State) => {
     setFilteredDate(value);
     onFilter(value[0]);
-  };
+  }, [onFilter]);
 
   useEffect(() => {
     handleChange({
@@ -48,6 +51,12 @@ const DateSlider: React.FC<DateSliderProps> = ({ range, onFilter }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    onSlide.pipe(
+      debounceTime(100),
+    ).subscribe(handleChange);
+  }, [handleChange, onSlide]);
+
   return (
     <SliderContainer>
       <Slider
@@ -55,7 +64,7 @@ const DateSlider: React.FC<DateSliderProps> = ({ range, onFilter }) => {
         min={min}
         max={max}
         step={86400}
-        onChange={handleChange}
+        onChange={(e) => onSlide.next(e)}
         overrides={{
           Root: {
             style: () => ({

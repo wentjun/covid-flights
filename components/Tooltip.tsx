@@ -63,6 +63,9 @@ export const ToolTip: React.FC<TooltipContent> = ({
       }) => (
         <Fragment key={callsign}>
           <Label2>
+            {callsign}
+            :
+            {' '}
             {departureAirport}
             {' '}
             to
@@ -70,11 +73,9 @@ export const ToolTip: React.FC<TooltipContent> = ({
             {arrivalAirport}
           </Label2>
           <Paragraph3>
-            {callsign}
+            {new Date(firstSeen * 1000).toLocaleString('en-GB', { hour12: true })}
             <br />
-            {new Date(firstSeen * 1000).toLocaleString('en-GB')}
-            <br />
-            {new Date(lastSeen * 1000).toLocaleString('en-GB')}
+            {new Date(lastSeen * 1000).toLocaleString('en-GB', { hour12: true })}
           </Paragraph3>
         </Fragment>
       ))
