@@ -1,15 +1,17 @@
-import { useStyletron } from 'baseui';
+import { styled, useStyletron } from 'baseui';
 import { Slider, State } from 'baseui/slider';
 import { Label3 } from 'baseui/typography';
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Subject } from 'rxjs';
 import { debounceTime, tap } from 'rxjs/operators';
-import { styled } from 'styletron-react';
+import { Flight } from '../interfaces/flight';
+import SimpleTimeSeries from './SImpleTimeSeries';
 
 const SliderContainer = styled('div', ({
   alignItems: 'center',
   backgroundColor: 'rgba(31, 31, 31, 0.8)',
   display: 'flex',
+  flexDirection: 'column',
   justifyContent: 'center',
   width: '100%',
   zIndex: 1,
@@ -23,17 +25,20 @@ const SliderContainer = styled('div', ({
 interface DateSliderProps {
   range: [number, number];
   onFilter: (value: number) => void;
+  flightData: Flight[];
+
 }
+const MIN_DATE = 1577808000; // 2020-01-01, 12AM SGT
+const SECONDS_PER_DAY = 86400; // 84600 seconds = 24 hours
 
 const DateSlider: React.FC<DateSliderProps> = ({ range, onFilter }) => {
   const onSlide = new Subject<State>();
-  const convertToDayStart = (epochTime: number) => new Date(new Date(Number(epochTime * 1000)).setHours(0, 0, 0));
+  // const convertToDayStart = (epochTime: number) => new Date(new Date(Number(epochTime * 1000)).setHours(0, 0, 0));
   const convertToDayEnd = (epochTime: number) => {
     const nextDay = new Date(Number(epochTime * 1000));
     nextDay.setDate(nextDay.getDate() + 1);
     return new Date(nextDay.setHours(0, 0, 0));
   };
-  const min = convertToDayStart(range[0]).getTime() / 1000;
   const max = convertToDayEnd(range[1]).getTime() / 1000;
 
   const [css, theme] = useStyletron();
@@ -60,11 +65,12 @@ const DateSlider: React.FC<DateSliderProps> = ({ range, onFilter }) => {
 
   return (
     <SliderContainer>
+      <SimpleTimeSeries />
       <Slider
         value={filteredDate}
-        min={min}
+        min={MIN_DATE}
         max={max}
-        step={86400}
+        step={SECONDS_PER_DAY}
         onChange={(e) => onSlide.next(e)}
         overrides={{
           Root: {
@@ -88,7 +94,7 @@ const DateSlider: React.FC<DateSliderProps> = ({ range, onFilter }) => {
               {(new Date(Number($value[0] * 1000))).toLocaleDateString('en-GB')}
             </Label3>
           ),
-          TickBar: ({ $min, $max }) => (
+          TickBar: ({ $max }) => (
             <div
               className={css({
                 color: theme.colors.primaryA,
@@ -100,7 +106,7 @@ const DateSlider: React.FC<DateSliderProps> = ({ range, onFilter }) => {
                 paddingBottom: theme.sizing.scale400,
               })}
             >
-              <Label3>{convertToDayStart($min).toLocaleDateString('en-GB')}</Label3>
+              <Label3>{new Date(MIN_DATE).toLocaleDateString('en-GB')}</Label3>
               <Label3>{convertToDayEnd($max).toLocaleDateString('en-GB')}</Label3>
             </div>
           ),

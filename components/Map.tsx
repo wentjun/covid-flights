@@ -12,7 +12,12 @@ import airlines from '../utils/airlines.json';
 import airportsRaw from '../utils/airports.json';
 import DateSlider from './DateSlider';
 import InformationPanel from './InformationPanel';
-import { FlightContent, ToolTip, TooltipContent } from './Tooltip';
+import {
+  FlightContent,
+  ToolTip,
+  TooltipContent,
+  isFlight,
+} from './Tooltip';
 
 const airports = airportsRaw as Airport[];
 
@@ -112,6 +117,13 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
     });
   };
 
+  /**
+   * triggers update when callsigns change
+   */
+  const shouldUpdateArc = (tooltipContent && isFlight(tooltipContent.content))
+    ? tooltipContent?.content.find((content: FlightContent) => content.callsign)?.callsign
+    : null;
+
   const renderLayers = [
     new ScatterplotLayer<Airport>({
       id: 'airports',
@@ -155,18 +167,9 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
       getTilt: 50,
       onHover: onArcHover,
       updateTriggers: {
-        getTargetColor: [
-          ((tooltipContent?.content as FlightContent[]) ?? []).find(({ callsign }: FlightContent) => callsign)?.callsign
-          || null,
-        ],
-        getSourceColor: [
-          ((tooltipContent?.content as FlightContent[]) ?? []).find(({ callsign }: FlightContent) => callsign)?.callsign
-          || null,
-        ],
-        getWidth: [
-          (tooltipContent?.content as FlightContent[])?.find(({ callsign }: FlightContent) => callsign)?.callsign
-         || null,
-        ],
+        getTargetColor: [shouldUpdateArc],
+        getSourceColor: [shouldUpdateArc],
+        getWidth: [shouldUpdateArc],
       },
     }),
   ];
@@ -189,7 +192,6 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
         type={type}
         content={content}
       />
-
     );
   };
 
@@ -293,6 +295,7 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
         <DateSlider
           range={timeRange}
           onFilter={onDateFilter}
+          flightData={flightData}
         />
       </ControlContainer>
     </MapContainer>

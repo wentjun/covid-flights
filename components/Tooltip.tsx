@@ -1,6 +1,6 @@
+import { styled } from 'baseui';
 import { Label2, Paragraph3 } from 'baseui/typography';
 import React, { Fragment } from 'react';
-import { styled } from 'styletron-react';
 import { Airport } from '../interfaces/airports';
 
 interface TooltipProps {
@@ -39,9 +39,11 @@ export interface TooltipContent {
 }
 
 // custom typeguards for Airport and Flight types
-const isAirport = (airport: Airport | FlightContent[]): airport is Airport => (airport as Airport).icao !== undefined;
-const isFlight = (flights: Airport | FlightContent[]): flights is FlightContent[] => (
-  (flights as FlightContent[]).some(({ callsign }) => callsign !== undefined)
+export const isAirport = (airport: Airport | FlightContent[]): airport is Airport => (
+  (airport as Airport).icao !== undefined
+);
+export const isFlight = (flights: Airport | FlightContent[]): flights is FlightContent[] => (
+  Array.isArray(flights) && (flights).some(({ callsign }) => callsign !== undefined)
 );
 
 export const ToolTip: React.FC<TooltipContent> = ({

@@ -1,0 +1,722 @@
+[
+  {
+    "date": 1577808000,
+    "totalFlightsCount": 1005,
+    "departureCount": 513,
+    "arrivalCount": 497
+  },
+  {
+    "date": 1577894400,
+    "totalFlightsCount": 1000,
+    "departureCount": 539,
+    "arrivalCount": 485
+  },
+  {
+    "date": 1577980800,
+    "totalFlightsCount": 962,
+    "departureCount": 543,
+    "arrivalCount": 427
+  },
+  {
+    "date": 1578067200,
+    "totalFlightsCount": 1047,
+    "departureCount": 546,
+    "arrivalCount": 519
+  },
+  {
+    "date": 1578153600,
+    "totalFlightsCount": 1052,
+    "departureCount": 552,
+    "arrivalCount": 512
+  },
+  {
+    "date": 1578240000,
+    "totalFlightsCount": 1021,
+    "departureCount": 523,
+    "arrivalCount": 508
+  },
+  {
+    "date": 1578326400,
+    "totalFlightsCount": 976,
+    "departureCount": 529,
+    "arrivalCount": 463
+  },
+  {
+    "date": 1578412800,
+    "totalFlightsCount": 913,
+    "departureCount": 512,
+    "arrivalCount": 409
+  },
+  {
+    "date": 1578499200,
+    "totalFlightsCount": 1020,
+    "departureCount": 547,
+    "arrivalCount": 495
+  },
+  {
+    "date": 1578585600,
+    "totalFlightsCount": 1035,
+    "departureCount": 547,
+    "arrivalCount": 506
+  },
+  {
+    "date": 1578672000,
+    "totalFlightsCount": 1025,
+    "departureCount": 554,
+    "arrivalCount": 497
+  },
+  {
+    "date": 1578758400,
+    "totalFlightsCount": 1002,
+    "departureCount": 547,
+    "arrivalCount": 477
+  },
+  {
+    "date": 1578844800,
+    "totalFlightsCount": 882,
+    "departureCount": 502,
+    "arrivalCount": 388
+  },
+  {
+    "date": 1578931200,
+    "totalFlightsCount": 1004,
+    "departureCount": 534,
+    "arrivalCount": 484
+  },
+  {
+    "date": 1579017600,
+    "totalFlightsCount": 992,
+    "departureCount": 525,
+    "arrivalCount": 483
+  },
+  {
+    "date": 1579104000,
+    "totalFlightsCount": 1023,
+    "departureCount": 543,
+    "arrivalCount": 508
+  },
+  {
+    "date": 1579190400,
+    "totalFlightsCount": 1050,
+    "departureCount": 561,
+    "arrivalCount": 515
+  },
+  {
+    "date": 1579276800,
+    "totalFlightsCount": 889,
+    "departureCount": 506,
+    "arrivalCount": 433
+  },
+  {
+    "date": 1579363200,
+    "totalFlightsCount": 1027,
+    "departureCount": 554,
+    "arrivalCount": 489
+  },
+  {
+    "date": 1579449600,
+    "totalFlightsCount": 928,
+    "departureCount": 530,
+    "arrivalCount": 414
+  },
+  {
+    "date": 1579536000,
+    "totalFlightsCount": 1007,
+    "departureCount": 550,
+    "arrivalCount": 473
+  },
+  {
+    "date": 1579622400,
+    "totalFlightsCount": 952,
+    "departureCount": 548,
+    "arrivalCount": 424
+  },
+  {
+    "date": 1579708800,
+    "totalFlightsCount": 1054,
+    "departureCount": 560,
+    "arrivalCount": 516
+  },
+  {
+    "date": 1579795200,
+    "totalFlightsCount": 1067,
+    "departureCount": 563,
+    "arrivalCount": 514
+  },
+  {
+    "date": 1579881600,
+    "totalFlightsCount": 1008,
+    "departureCount": 557,
+    "arrivalCount": 477
+  },
+  {
+    "date": 1579968000,
+    "totalFlightsCount": 957,
+    "departureCount": 537,
+    "arrivalCount": 428
+  },
+  {
+    "date": 1580054400,
+    "totalFlightsCount": 1044,
+    "departureCount": 545,
+    "arrivalCount": 519
+  },
+  {
+    "date": 1580140800,
+    "totalFlightsCount": 1031,
+    "departureCount": 540,
+    "arrivalCount": 501
+  },
+  {
+    "date": 1580227200,
+    "totalFlightsCount": 1011,
+    "departureCount": 529,
+    "arrivalCount": 500
+  },
+  {
+    "date": 1580313600,
+    "totalFlightsCount": 974,
+    "departureCount": 547,
+    "arrivalCount": 453
+  },
+  {
+    "date": 1580400000,
+    "totalFlightsCount": 925,
+    "departureCount": 523,
+    "arrivalCount": 414
+  },
+  {
+    "date": 1580486400,
+    "totalFlightsCount": 1010,
+    "departureCount": 529,
+    "arrivalCount": 501
+  },
+  {
+    "date": 1580572800,
+    "totalFlightsCount": 980,
+    "departureCount": 504,
+    "arrivalCount": 496
+  },
+  {
+    "date": 1580659200,
+    "totalFlightsCount": 975,
+    "departureCount": 505,
+    "arrivalCount": 488
+  },
+  {
+    "date": 1580745600,
+    "totalFlightsCount": 930,
+    "departureCount": 482,
+    "arrivalCount": 458
+  },
+  {
+    "date": 1580832000,
+    "totalFlightsCount": 919,
+    "departureCount": 473,
+    "arrivalCount": 460
+  },
+  {
+    "date": 1580918400,
+    "totalFlightsCount": 921,
+    "departureCount": 474,
+    "arrivalCount": 459
+  },
+  {
+    "date": 1581004800,
+    "totalFlightsCount": 879,
+    "departureCount": 407,
+    "arrivalCount": 482
+  },
+  {
+    "date": 1581091200,
+    "totalFlightsCount": 487,
+    "departureCount": 94,
+    "arrivalCount": 401
+  },
+  {
+    "date": 1581177600,
+    "totalFlightsCount": 747,
+    "departureCount": 302,
+    "arrivalCount": 447
+  },
+  {
+    "date": 1581264000,
+    "totalFlightsCount": 915,
+    "departureCount": 467,
+    "arrivalCount": 460
+  },
+  {
+    "date": 1581350400,
+    "totalFlightsCount": 768,
+    "departureCount": 348,
+    "arrivalCount": 420
+  },
+  {
+    "date": 1581436800,
+    "totalFlightsCount": 868,
+    "departureCount": 441,
+    "arrivalCount": 439
+  },
+  {
+    "date": 1581523200,
+    "totalFlightsCount": 896,
+    "departureCount": 460,
+    "arrivalCount": 452
+  },
+  {
+    "date": 1581609600,
+    "totalFlightsCount": 902,
+    "departureCount": 484,
+    "arrivalCount": 438
+  },
+  {
+    "date": 1581696000,
+    "totalFlightsCount": 807,
+    "departureCount": 449,
+    "arrivalCount": 370
+  },
+  {
+    "date": 1581782400,
+    "totalFlightsCount": 895,
+    "departureCount": 459,
+    "arrivalCount": 452
+  },
+  {
+    "date": 1581868800,
+    "totalFlightsCount": 869,
+    "departureCount": 447,
+    "arrivalCount": 436
+  },
+  {
+    "date": 1581955200,
+    "totalFlightsCount": 804,
+    "departureCount": 412,
+    "arrivalCount": 398
+  },
+  {
+    "date": 1582041600,
+    "totalFlightsCount": 822,
+    "departureCount": 416,
+    "arrivalCount": 416
+  },
+  {
+    "date": 1582128000,
+    "totalFlightsCount": 838,
+    "departureCount": 424,
+    "arrivalCount": 416
+  },
+  {
+    "date": 1582214400,
+    "totalFlightsCount": 874,
+    "departureCount": 437,
+    "arrivalCount": 443
+  },
+  {
+    "date": 1582300800,
+    "totalFlightsCount": 832,
+    "departureCount": 427,
+    "arrivalCount": 417
+  },
+  {
+    "date": 1582387200,
+    "totalFlightsCount": 859,
+    "departureCount": 438,
+    "arrivalCount": 427
+  },
+  {
+    "date": 1582473600,
+    "totalFlightsCount": 811,
+    "departureCount": 421,
+    "arrivalCount": 406
+  },
+  {
+    "date": 1582560000,
+    "totalFlightsCount": 738,
+    "departureCount": 377,
+    "arrivalCount": 365
+  },
+  {
+    "date": 1582646400,
+    "totalFlightsCount": 780,
+    "departureCount": 391,
+    "arrivalCount": 393
+  },
+  {
+    "date": 1582732800,
+    "totalFlightsCount": 764,
+    "departureCount": 388,
+    "arrivalCount": 388
+  },
+  {
+    "date": 1582819200,
+    "totalFlightsCount": 830,
+    "departureCount": 421,
+    "arrivalCount": 423
+  },
+  {
+    "date": 1582905600,
+    "totalFlightsCount": 777,
+    "departureCount": 398,
+    "arrivalCount": 387
+  },
+  {
+    "date": 1582992000,
+    "totalFlightsCount": 654,
+    "departureCount": 248,
+    "arrivalCount": 420
+  },
+  {
+    "date": 1583078400,
+    "totalFlightsCount": 432,
+    "departureCount": 69,
+    "arrivalCount": 365
+  },
+  {
+    "date": 1583164800,
+    "totalFlightsCount": 298,
+    "departureCount": 78,
+    "arrivalCount": 224
+  },
+  {
+    "date": 1583251200,
+    "totalFlightsCount": 323,
+    "departureCount": 50,
+    "arrivalCount": 275
+  },
+  {
+    "date": 1583337600,
+    "totalFlightsCount": 389,
+    "departureCount": 59,
+    "arrivalCount": 332
+  },
+  {
+    "date": 1583424000,
+    "totalFlightsCount": 471,
+    "departureCount": 102,
+    "arrivalCount": 371
+  },
+  {
+    "date": 1583510400,
+    "totalFlightsCount": 62,
+    "departureCount": 13,
+    "arrivalCount": 49
+  },
+  {
+    "date": 1583596800,
+    "totalFlightsCount": 266,
+    "departureCount": 61,
+    "arrivalCount": 205
+  },
+  {
+    "date": 1583683200,
+    "totalFlightsCount": 52,
+    "departureCount": 0,
+    "arrivalCount": 52
+  },
+  {
+    "date": 1583769600,
+    "totalFlightsCount": 232,
+    "departureCount": 62,
+    "arrivalCount": 170
+  },
+  {
+    "date": 1583856000,
+    "totalFlightsCount": 408,
+    "departureCount": 135,
+    "arrivalCount": 279
+  },
+  {
+    "date": 1583942400,
+    "totalFlightsCount": 355,
+    "departureCount": 56,
+    "arrivalCount": 299
+  },
+  {
+    "date": 1584028800,
+    "totalFlightsCount": 406,
+    "departureCount": 86,
+    "arrivalCount": 324
+  },
+  {
+    "date": 1584115200,
+    "totalFlightsCount": 419,
+    "departureCount": 102,
+    "arrivalCount": 323
+  },
+  {
+    "date": 1584201600,
+    "totalFlightsCount": 415,
+    "departureCount": 80,
+    "arrivalCount": 339
+  },
+  {
+    "date": 1584288000,
+    "totalFlightsCount": 347,
+    "departureCount": 60,
+    "arrivalCount": 291
+  },
+  {
+    "date": 1584374400,
+    "totalFlightsCount": 347,
+    "departureCount": 97,
+    "arrivalCount": 256
+  },
+  {
+    "date": 1584460800,
+    "totalFlightsCount": 347,
+    "departureCount": 93,
+    "arrivalCount": 254
+  },
+  {
+    "date": 1584547200,
+    "totalFlightsCount": 291,
+    "departureCount": 74,
+    "arrivalCount": 219
+  },
+  {
+    "date": 1584633600,
+    "totalFlightsCount": 318,
+    "departureCount": 81,
+    "arrivalCount": 243
+  },
+  {
+    "date": 1584720000,
+    "totalFlightsCount": 253,
+    "departureCount": 61,
+    "arrivalCount": 192
+  },
+  {
+    "date": 1584806400,
+    "totalFlightsCount": 129,
+    "departureCount": 33,
+    "arrivalCount": 96
+  },
+  {
+    "date": 1584892800,
+    "totalFlightsCount": 35,
+    "departureCount": 9,
+    "arrivalCount": 26
+  },
+  {
+    "date": 1584979200,
+    "totalFlightsCount": 121,
+    "departureCount": 42,
+    "arrivalCount": 79
+  },
+  {
+    "date": 1585065600,
+    "totalFlightsCount": 111,
+    "departureCount": 34,
+    "arrivalCount": 77
+  },
+  {
+    "date": 1585152000,
+    "totalFlightsCount": 72,
+    "departureCount": 19,
+    "arrivalCount": 53
+  },
+  {
+    "date": 1585238400,
+    "totalFlightsCount": 100,
+    "departureCount": 28,
+    "arrivalCount": 72
+  },
+  {
+    "date": 1585324800,
+    "totalFlightsCount": 90,
+    "departureCount": 22,
+    "arrivalCount": 68
+  },
+  {
+    "date": 1585411200,
+    "totalFlightsCount": 79,
+    "departureCount": 20,
+    "arrivalCount": 59
+  },
+  {
+    "date": 1585497600,
+    "totalFlightsCount": 64,
+    "departureCount": 24,
+    "arrivalCount": 40
+  },
+  {
+    "date": 1585584000,
+    "totalFlightsCount": 67,
+    "departureCount": 24,
+    "arrivalCount": 43
+  },
+  {
+    "date": 1585670400,
+    "totalFlightsCount": 104,
+    "departureCount": 40,
+    "arrivalCount": 64
+  },
+  {
+    "date": 1585756800,
+    "totalFlightsCount": 83,
+    "departureCount": 28,
+    "arrivalCount": 55
+  },
+  {
+    "date": 1585843200,
+    "totalFlightsCount": 102,
+    "departureCount": 39,
+    "arrivalCount": 63
+  },
+  {
+    "date": 1585929600,
+    "totalFlightsCount": 86,
+    "departureCount": 24,
+    "arrivalCount": 62
+  },
+  {
+    "date": 1586016000,
+    "totalFlightsCount": 85,
+    "departureCount": 23,
+    "arrivalCount": 62
+  },
+  {
+    "date": 1586102400,
+    "totalFlightsCount": 71,
+    "departureCount": 23,
+    "arrivalCount": 48
+  },
+  {
+    "date": 1586188800,
+    "totalFlightsCount": 77,
+    "departureCount": 28,
+    "arrivalCount": 49
+  },
+  {
+    "date": 1586275200,
+    "totalFlightsCount": 91,
+    "departureCount": 30,
+    "arrivalCount": 61
+  },
+  {
+    "date": 1586361600,
+    "totalFlightsCount": 73,
+    "departureCount": 22,
+    "arrivalCount": 51
+  },
+  {
+    "date": 1586448000,
+    "totalFlightsCount": 116,
+    "departureCount": 42,
+    "arrivalCount": 74
+  },
+  {
+    "date": 1586534400,
+    "totalFlightsCount": 69,
+    "departureCount": 18,
+    "arrivalCount": 51
+  },
+  {
+    "date": 1586620800,
+    "totalFlightsCount": 76,
+    "departureCount": 24,
+    "arrivalCount": 52
+  },
+  {
+    "date": 1586707200,
+    "totalFlightsCount": 54,
+    "departureCount": 16,
+    "arrivalCount": 38
+  },
+  {
+    "date": 1586793600,
+    "totalFlightsCount": 70,
+    "departureCount": 27,
+    "arrivalCount": 43
+  },
+  {
+    "date": 1586880000,
+    "totalFlightsCount": 86,
+    "departureCount": 28,
+    "arrivalCount": 58
+  },
+  {
+    "date": 1586966400,
+    "totalFlightsCount": 74,
+    "departureCount": 23,
+    "arrivalCount": 51
+  },
+  {
+    "date": 1587052800,
+    "totalFlightsCount": 106,
+    "departureCount": 42,
+    "arrivalCount": 64
+  },
+  {
+    "date": 1587139200,
+    "totalFlightsCount": 74,
+    "departureCount": 22,
+    "arrivalCount": 52
+  },
+  {
+    "date": 1587225600,
+    "totalFlightsCount": 73,
+    "departureCount": 19,
+    "arrivalCount": 54
+  },
+  {
+    "date": 1587312000,
+    "totalFlightsCount": 67,
+    "departureCount": 24,
+    "arrivalCount": 43
+  },
+  {
+    "date": 1587398400,
+    "totalFlightsCount": 86,
+    "departureCount": 35,
+    "arrivalCount": 51
+  },
+  {
+    "date": 1587484800,
+    "totalFlightsCount": 105,
+    "departureCount": 31,
+    "arrivalCount": 74
+  },
+  {
+    "date": 1587571200,
+    "totalFlightsCount": 55,
+    "departureCount": 12,
+    "arrivalCount": 43
+  },
+  {
+    "date": 1587657600,
+    "totalFlightsCount": 120,
+    "departureCount": 51,
+    "arrivalCount": 69
+  },
+  {
+    "date": 1587744000,
+    "totalFlightsCount": 108,
+    "departureCount": 45,
+    "arrivalCount": 63
+  },
+  {
+    "date": 1587830400,
+    "totalFlightsCount": 97,
+    "departureCount": 35,
+    "arrivalCount": 62
+  },
+  {
+    "date": 1587916800,
+    "totalFlightsCount": 80,
+    "departureCount": 32,
+    "arrivalCount": 50
+  },
+  {
+    "date": 1588003200,
+    "totalFlightsCount": 87,
+    "departureCount": 35,
+    "arrivalCount": 52
+  },
+  {
+    "date": 1588089600,
+    "totalFlightsCount": 92,
+    "departureCount": 35,
+    "arrivalCount": 57
+  }
+]
