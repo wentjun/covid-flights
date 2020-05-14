@@ -3,6 +3,7 @@ import { Panel, StatelessAccordion } from 'baseui/accordion';
 import { Checkbox, LABEL_PLACEMENT } from 'baseui/checkbox';
 import { Display4, Label1, Label2 } from 'baseui/typography';
 import React, { useEffect, useState } from 'react';
+import { Button } from 'baseui/button';
 import { Flight } from '../interfaces/flight';
 import { FilterContext, PanelFilterCount } from '../interfaces/main';
 
@@ -39,6 +40,7 @@ const InformationPanel: React.FC<InformationPanelProps> = ({
 }) => {
   const [localPanelFilter, setPanelFilter] = useState< PanelFilterCount[]>([]);
   const [isAccordionExpanded, setIsAccordionExpanded] = useState<React.Key[]>([]);
+  const [, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const viewportWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
@@ -122,6 +124,7 @@ const InformationPanel: React.FC<InformationPanelProps> = ({
         }}
       >
         <CurrentDate>{new Date(selectedDate * 1000).toLocaleDateString('en-GB')}</CurrentDate>
+        <Button onClick={() => setIsModalOpen(true)}>Open Modal</Button>
         <Summary>
           <SummaryTitle>Summary</SummaryTitle>
           <Display4>{data.length}</Display4>

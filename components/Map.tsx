@@ -205,10 +205,15 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
       selectedDate: current,
       removedAirlines: [],
     });
-    const dateFilteredFlights = flightData.filter(({ lastSeen }) => (
-      lastSeen <= current
-      && lastSeen > (current - 86400)
-    ));
+
+    const dateFilteredFlights = flightData.filter(({
+      lastSeen, firstSeen, estArrivalAirport,
+    }) => {
+      if (estArrivalAirport && estArrivalAirport.trim() === 'WSSS') {
+        return lastSeen >= current && lastSeen < (current + 86400);
+      }
+      return firstSeen >= current && firstSeen < (current + 86400);
+    });
     setFilteredFlightData(dateFilteredFlights);
 
     const calculated: PanelFilterCount[] = dateFilteredFlights.reduce((acc, cur) => {
@@ -259,11 +264,18 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
       ...filterContext,
       removedAirlines: updatedRemovedAirlines,
     });
-    setFilteredFlightData(flightData.filter(({ callsign, lastSeen }) => (
-      lastSeen <= selectedDate
-      && lastSeen > (selectedDate - 86400)
-      && !updatedRemovedAirlines.some((airlineCode) => callsign.includes(airlineCode))
-    )));
+
+    setFilteredFlightData(flightData.filter(({
+      callsign, lastSeen, firstSeen, estArrivalAirport,
+    }) => {
+      const filterByType = () => {
+        if (estArrivalAirport && estArrivalAirport.trim() === 'WSSS') {
+          return lastSeen >= selectedDate && lastSeen < (selectedDate + 86400);
+        }
+        return firstSeen >= selectedDate && firstSeen < (selectedDate + 86400);
+      };
+      return filterByType() && !updatedRemovedAirlines.some((airlineCode) => callsign.includes(airlineCode));
+    }));
   };
 
   return (
