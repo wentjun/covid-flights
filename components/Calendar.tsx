@@ -15,9 +15,7 @@ const ChartContainer = styled('div', ({ $theme }) => ({
 
 const Calendar: React.FC = () => {
   const [, theme] = useStyletron();
-  // console.log(theme.colors.primaryA);
-  // const red = css({ backgroundColor: theme.colors.negative });
-  // console.log(red);
+
   return (
     <ChartContainer>
       <ResponsiveCalendar
@@ -27,7 +25,10 @@ const Calendar: React.FC = () => {
         emptyColor={theme.colors.primary100}
         colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
         margin={{
-          top: 40, right: 40, bottom: 40, left: 40,
+          top: 40,
+          right: 40,
+          bottom: 40,
+          left: 40,
         }}
         yearSpacing={40}
         monthBorderColor={theme.colors.primary50}
@@ -43,26 +44,26 @@ const Calendar: React.FC = () => {
             itemHeight: 36,
             itemsSpacing: 14,
             itemDirection: 'right-to-left',
-            itemTextColor: theme.colors.primaryA,
+            itemTextColor: theme.colors.contentTertiary,
           },
         ]}
-        // theme={{
-        //   axis: {
-        //     ticks: {
-        //       line: {
-        //         stroke: theme.colors.primaryA,
-        //       },
-        //       text: {
-        //         fill: theme.colors.primaryA,
-        //       },
-        //     },
-        //     legend: {
-        //       text: {
-        //         fill: theme.colors.primaryA,
-        //       },
-        //     },
-        //   },
-        // }}
+        theme={{
+          axis: {
+            ticks: {
+              line: {
+                stroke: theme.colors.contentTertiary,
+              },
+              text: {
+                fill: theme.colors.contentTertiary,
+              },
+            },
+            legend: {
+              text: {
+                fill: theme.colors.contentTertiary,
+              },
+            },
+          },
+        }}
       />
     </ChartContainer>
   );

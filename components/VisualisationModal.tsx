@@ -3,6 +3,7 @@ import {
 } from 'baseui/modal';
 import { useEffect, useState } from 'react';
 import Calendar from './Calendar';
+import MultiLine from './MultiLine';
 
 interface VisualisationModalProps {
   triggerOpen: boolean;
@@ -41,6 +42,7 @@ const VisualisationModal: React.FC<VisualisationModalProps> = ({ triggerOpen, on
       >
         <ModalHeader>Sample Title</ModalHeader>
         <ModalBody>
+          <MultiLine />
           <Calendar />
         </ModalBody>
         <ModalFooter>
