@@ -2,6 +2,7 @@ import {
   Modal, ModalBody, ModalButton, ModalFooter, ModalHeader, SIZE,
 } from 'baseui/modal';
 import { useEffect, useState } from 'react';
+import Calendar from './Calendar';
 
 interface VisualisationModalProps {
   triggerOpen: boolean;
@@ -40,7 +41,7 @@ const VisualisationModal: React.FC<VisualisationModalProps> = ({ triggerOpen, on
       >
         <ModalHeader>Sample Title</ModalHeader>
         <ModalBody>
-          Sample body
+          <Calendar />
         </ModalBody>
         <ModalFooter>
           <ModalButton kind='tertiary' onClick={closeModal}>
