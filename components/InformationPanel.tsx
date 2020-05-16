@@ -1,9 +1,9 @@
 import { styled } from 'baseui';
 import { Panel, StatelessAccordion } from 'baseui/accordion';
+import { Button, KIND, SIZE } from 'baseui/button';
 import { Checkbox, LABEL_PLACEMENT } from 'baseui/checkbox';
 import { Display4, Label1, Label2 } from 'baseui/typography';
 import React, { useEffect, useState } from 'react';
-import { Button } from 'baseui/button';
 import { Flight } from '../interfaces/flight';
 import { FilterContext, PanelFilterCount } from '../interfaces/main';
 
@@ -33,14 +33,14 @@ interface InformationPanelProps {
   panelFilter?: PanelFilterCount[];
   filterContext: FilterContext;
   onAirlineFilter: (codes: string) => void;
+  setIsModalOpen: () => void;
 }
 
 const InformationPanel: React.FC<InformationPanelProps> = ({
-  filterContext: { selectedDate }, panelFilter, data, onAirlineFilter,
+  filterContext: { selectedDate }, panelFilter, data, onAirlineFilter, setIsModalOpen,
 }) => {
   const [localPanelFilter, setPanelFilter] = useState< PanelFilterCount[]>([]);
   const [isAccordionExpanded, setIsAccordionExpanded] = useState<React.Key[]>([]);
-  const [, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const viewportWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
@@ -124,7 +124,13 @@ const InformationPanel: React.FC<InformationPanelProps> = ({
         }}
       >
         <CurrentDate>{new Date(selectedDate * 1000).toLocaleDateString('en-GB')}</CurrentDate>
-        <Button onClick={() => setIsModalOpen(true)}>Open Modal</Button>
+        <Button
+          onClick={() => setIsModalOpen()}
+          kind={KIND.secondary}
+          size={SIZE.compact}
+        >
+          View Statistics
+        </Button>
         <Summary>
           <SummaryTitle>Summary</SummaryTitle>
           <Display4>{data.length}</Display4>

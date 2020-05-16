@@ -26,8 +26,8 @@ interface DateSliderProps {
   range: [number, number];
   onFilter: (value: number) => void;
   flightData: Flight[];
-
 }
+
 const MIN_DATE = 1577808000; // 2020-01-01, 12AM SGT
 const SECONDS_PER_DAY = 86400; // 84600 seconds = 24 hours
 
@@ -40,12 +40,10 @@ const DateSlider: React.FC<DateSliderProps> = ({ range, onFilter }) => {
     return new Date(nextDay.setHours(0, 0, 0));
   };
   const max = convertToDayEnd(range[1]).getTime() / 1000;
-
   const [css, theme] = useStyletron();
   const [filteredDate, setFilteredDate] = useState([max]);
 
   const handleChange = useCallback(({ value }: State) => {
-    // setFilteredDate(value);
     onFilter(value[0]);
   }, [onFilter]);
 
@@ -106,7 +104,7 @@ const DateSlider: React.FC<DateSliderProps> = ({ range, onFilter }) => {
                 paddingBottom: theme.sizing.scale400,
               })}
             >
-              <Label3>{new Date(MIN_DATE).toLocaleDateString('en-GB')}</Label3>
+              <Label3>{new Date(MIN_DATE * 1000).toLocaleDateString('en-GB')}</Label3>
               <Label3>{convertToDayEnd($max).toLocaleDateString('en-GB')}</Label3>
             </div>
           ),

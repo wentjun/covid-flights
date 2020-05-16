@@ -1,10 +1,10 @@
 import { MapView } from '@deck.gl/core';
+import { PickInfo } from '@deck.gl/core/lib/deck';
 import { ArcLayer, ScatterplotLayer } from '@deck.gl/layers';
 import DeckGL from '@deck.gl/react';
 import { styled } from 'baseui';
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { StaticMap } from 'react-map-gl';
-import { PickInfo } from '@deck.gl/core/lib/deck';
 import { Airport } from '../interfaces/airports';
 import { Flight } from '../interfaces/flight';
 import { FilterContext, PanelFilterCount } from '../interfaces/main';
@@ -14,10 +14,11 @@ import DateSlider from './DateSlider';
 import InformationPanel from './InformationPanel';
 import {
   FlightContent,
+  isFlight,
   ToolTip,
   TooltipContent,
-  isFlight,
 } from './Tooltip';
+import VisualisationModal from './VisualisationModal';
 
 const airports = airportsRaw as Airport[];
 
@@ -34,7 +35,7 @@ const ControlContainer = styled('div', ({ $theme }) => ({
   maxHeight: '100vh',
   justifyContent: 'space-between',
   padding: $theme.sizing.scale600,
-  zIndex: 1,
+  // zIndex: 1,
 
   '@media (min-width: 768px)': {
     alignItems: 'flex-end',
@@ -83,6 +84,7 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
     selectedDate: timeRange[1],
     removedAirlines: [],
   });
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const deckRef = useRef<DeckGL>(null);
 
   /**
@@ -221,8 +223,6 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
 
       const airline = airlines.find((obj) => callsign && obj.icao && callsign.includes(obj.icao));
       if (!airline || !airline.name || !airline.icao) {
-        // console.log(airline);
-        // console.log(callsign);
         return acc;
       }
       const { name, icao } = airline;
@@ -298,11 +298,16 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
         {renderTooltip()}
       </DeckGL>
       <ControlContainer>
+        <VisualisationModal
+          onClose={() => setIsModalOpen(false)}
+          triggerOpen={isModalOpen}
+        />
         <InformationPanel
           filterContext={filterContext}
           panelFilter={panelFilter}
           data={filteredFlightData}
           onAirlineFilter={onAirlineFilter}
+          setIsModalOpen={() => setIsModalOpen(true)}
         />
         <DateSlider
           range={timeRange}
