@@ -9,7 +9,7 @@ import { Airport } from '../interfaces/airports';
 import { Flight } from '../interfaces/flight';
 import { FilterContext, PanelFilterCount } from '../interfaces/main';
 import airlines from '../utils/airlines.json';
-import airportsRaw from '../utils/airports.json';
+import airports from '../utils/airports.json';
 import DateSlider from './DateSlider';
 import InformationPanel from './InformationPanel';
 import {
@@ -19,8 +19,6 @@ import {
   TooltipContent,
 } from './Tooltip';
 import VisualisationModal from './VisualisationModal';
-
-const airports = airportsRaw as Airport[];
 
 const MapContainer = styled('div', ({
   height: 'fill-available',
@@ -96,6 +94,7 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
       setTooltipContent(undefined);
       return;
     }
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const layers: PickInfo<Flight>[] = deckRef?.current?.pickObjects({
       x,
       y,
@@ -129,7 +128,7 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
   const renderLayers = [
     new ScatterplotLayer<Airport>({
       id: 'airports',
-      data: airports,
+      data: airports as Airport[],
       radiusScale: 20,
       getPosition: (d) => d.coordinates as [number, number],
       getFillColor: [255, 140, 0],
@@ -280,8 +279,8 @@ const Map: React.FC<MapProps> = ({ flightData }) => {
 
   return (
     <MapContainer>
+      {/* @ts-ignore */}
       <DeckGL
-        // @ts-ignore
         views={VIEWS}
         initialViewState={INITIAL_VIEW_STATE}
         layers={renderLayers}

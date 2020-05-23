@@ -3,8 +3,8 @@ import Map from '../components/Map';
 import { Flight } from '../interfaces/flight';
 import flights from '../utils/flights.json';
 
-const IndexPage = () => (
-  <Layout title='Home | Next.js + TypeScript Example'>
+const IndexPage: React.FC = () => (
+  <Layout title='COVID-19 Flights Analysis'>
     <Map flightData={flights as Flight[]} />
   </Layout>
 );

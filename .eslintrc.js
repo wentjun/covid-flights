@@ -32,6 +32,7 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     'react/react-in-jsx-scope': 'off',
     'consistent-return': 'off',
+    '@typescript-eslint/camelcase': 'off',
     // baseui
     'baseui/deprecated-theme-api': "warn",
     'baseui/deprecated-component-api': "warn",
